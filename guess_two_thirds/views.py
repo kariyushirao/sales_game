@@ -2,13 +2,15 @@ from . import models
 from ._builtin import Page, WaitPage
 
 
-class ArrivalWaitPage(WaitPage):
-    group_by_arrival_time = True
+# class ArrivalWaitPage(WaitPage):
+#     group_by_arrival_time = True
 
-    def is_displayed(self):
-        return self.round_number == 1
+#     def is_displayed(self):
+#         return self.round_number == 1
+
 
 class IntroductionNovice(Page):
+    group_by_arrival_time = True
     def is_displayed(self):
         return self.round_number == 1 and self.group.treatment == 'novice'
 
@@ -16,6 +18,7 @@ class IntroductionNovice(Page):
 
 
 class IntroductionExpert(Page):
+    group_by_arrival_time = True
     def is_displayed(self):
         return self.round_number == 1 and self.group.treatment == 'expert'
 
@@ -50,8 +53,7 @@ class Results(Page):
     timeout_seconds = 30
 
 
-page_sequence = [ArrivalWaitPage,
-                 IntroductionNovice,
+page_sequence = [IntroductionNovice,
                  IntroductionExpert,
                  Guess,
                  ResultsWaitPage,

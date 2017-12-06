@@ -45,6 +45,9 @@ DATABASES = {
 #   anybody can play a demo version of your game, but not access the rest
 #   of the admin interface, set it to DEMO.
 
+# sentry account
+SENTRY_DSN = 'http://b8fc561a3b23401ba162d355df0c4990:a2bf0845f5f6452093aa9dc5a0b9820a@sentry.otree.org/246'
+
 # for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
 
