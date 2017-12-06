@@ -126,7 +126,7 @@ mturk_hit_settings = {
             'QualificationTypeID': "3TBOPHETGJKON9TEO7236BKDIO22LX",
             'Comparator': "DoesNotExist",
         },
-        requires workers be located in the US
+        # requires workers be located in the US
         {
             'QualificationTypeID': '00000000000000000071',
             'Comparator': "EqualTo",
