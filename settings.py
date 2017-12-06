@@ -130,19 +130,22 @@ mturk_hit_settings = {
         {
             'QualificationTypeID': "00000000000000000071",
             'Comparator': "EqualTo",
-            'LocaleValues': [{'Country': "US"}]
+            'LocaleValue': [{'Country': "US"}],
+            'RequiredToPreview': "true", 
         },
         # requires workers to have completed at least 5 HITs
         {
             'QualificationTypeID': "00000000000000000040",
             'Comparator': "GreaterThan",
-            'IntegerValues': [5]
+            'IntegerValue': [5],
+            'RequiredToPreview': "true",
         },
         # requires workers to have HIT approval rate of at least 95 percent
         {
             'QualificationTypeID': "000000000000000000L0",
             'Comparator': "GreaterThanOrEqualTo",
-            'IntegerValues': [95]
+            'IntegerValue': [95],
+            'RequiredToPreview': "true",
         },
     ]
 }
