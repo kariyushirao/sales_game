@@ -1,0 +1,16 @@
+{% extends "global/PageExt.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Attention!
+{% endblock %}
+
+{% block inner_content %}
+    {% include 'global/OutOfGameReminder.html' %}
+    <div class="bs-callout bs-callout-danger">
+        <h4>Attention!</h4>
+    <p>At the next page we will ask you to read and confirm your agreement with the Consent Form.</p>
+    <p>You will have <b>3 minutes</b> to do this.</p>
+    </div>
+    {% next_button %}
+{% endblock %}

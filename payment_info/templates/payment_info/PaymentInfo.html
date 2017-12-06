@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Thank you!
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+            <p>
+                <strong>Your Participant Code:</strong> {{ redemption_code }}
+            </p>
+            <p>
+                Please save your participant code.  Your work should automatically be submitted
+                once you click the "Next" button below.  If there are any issues, you may 
+                email kariyushi@uchicago.edu, and provide your participant code in order to get
+                assistance.
+            </p>
+        </div>
+    </div>
+
+{% next_button %}
+
+{% endblock %}

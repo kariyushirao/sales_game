@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>Here are the answers provided by you and your teammates:</p>
+
+    <p>
+        {{ sorted_guesses }}
+    </p>
+
+    <p>
+        The highest guess was {{ group.highest_guess }};
+        the lowest guess was {{ group.lowest_guess }}.
+    </p>
+
+    <p>Your guess was {{ player.guess }}.</p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+
+
+

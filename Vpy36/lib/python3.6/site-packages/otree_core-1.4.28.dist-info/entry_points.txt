@@ -1,0 +1,3 @@
+[console_scripts]
+otree = otree.management.cli:otree_cli
+

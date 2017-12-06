@@ -1,0 +1,160 @@
+{% extends "global/PageExt.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Informed Consent Information
+{% endblock %}
+
+{% block inner_content %}
+<div class="panel panel-danger">
+    <div class="panel-heading">Attention!</div>
+    <div class="panel-body">
+        <p>You have <b>{{ consent_timeout_min }}</b> minute{{ consent_timeout_min|pluralize }} to read and accept this
+            Consent Form.</p>
+        <p>If you are not going to proceed with this HIT <b>immediately</b>, please return it right now!</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box1 shadow1">
+            <p>
+                You must read the following carefully before checking the box next to the red informed consent statement
+                below the text area to proceed with your participation.
+
+            </p>
+            <h3>Participation:</h3>
+            <p>
+                 You must be 18 years of age or older to participate. Your
+                participation is voluntary, and you may choose not to participate or to
+                withdraw from a study at any time and for any reason with no penalty.
+            </p>
+            <h3>Risks:</h3>
+            <p>
+                There are no known harms or discomforts beyond those encountered in
+                the decision-making of normal daily life. There is no cost to you to
+                participating.
+            </p>
+            <h3>Benefits:</h3>
+            <p>
+                 There are no direct benefits to you other than monetary payments,
+                but benefits to society include the generalized knowledge gained about
+                decision-making.
+            </p>
+            <h3>Procedures:</h3>
+            <p>
+                We will ask you to fill in the small questionnaire. It will take no more than 5 minutes of your time.
+            </p>
+            <h3>Privacy:</h3>
+            <p>
+                The only personal information that will be available to the
+                researchers is what is publicly available on your MTurk profile
+                and any information that you choose to provide during the course of the
+                study. This information will not be shared with any individuals who are not
+                part of the research team.
+            </p>
+
+            <h3>Contact:</h3>
+            <p>
+                If you have questions or concerns, please contact the researchers
+                at
+                <a href="mailto:chapkovskii@soziologie.uzh.ch">chapkovskii@soziologie.uzh.ch</a>.
+
+            </p>
+            <h3>Concent:</h3>
+            <p>
+                 By checking the box below next to the red informed consent
+                statement, you acknowledge that you have read the rules and privacy policy,
+                you certify you are 18 years of age or older, and you agree that your
+                participation is voluntary.
+            </p>
+            <p class='red'>
+                <i>{{form.consent}}
+                    I acknowledge that I have read the rules and privacy policy, I
+                    certify I am 18 years of age or older, and I agree that my registration in
+                    the subject pool is voluntary.</i>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="new_placeholder_for_otree_timer"></div>
+{% next_button %}
+{% if form.consent.errors %}
+<div class="modal fade" tabindex="-1" role="dialog" id='myModal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Please, accept this consent agreement</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{ form.consent.errors|striptags }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endif %}
+
+</div>
+{% if form.consent.errors %}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script>
+    $('#myModal').modal('toggle');
+    $(document).ready(function () {
+        var probs = $('.probs');
+        probs.html("");
+    });
+</script>
+
+{% endif %}
+<script>
+    var $otree_timer = $('.otree-timer');
+    $otree_timer.remove();
+    $otree_timer.removeClass('alert alert-warning');
+    $otree_timer.addClass('bs-callout bs-callout-danger');
+    $('.new_placeholder_for_otree_timer').append($otree_timer);
+    $otree_timer.show()
+</script>
+
+{% endblock %}
+
+
+{% block styles%}
+<style>
+    .otree-timer {
+        display: none;
+    }
+
+    .box {
+        width: 100%;
+        /*height:200px;*/
+        float: left;
+        background-color: white;
+        /*margin:0px 10px 25px 15px;*/
+        margin-bottom: 30px;
+        border-radius: 5px;
+    }
+
+    .box1 {
+        background-color: #fcf8e3;
+        padding: 20px;
+    }
+
+    /*
+    .shadow1{
+      position:relative;
+    }*/
+    .shadow1 {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+    }
+
+    .red {
+        color: red;
+    }
+</style>{% endblock %}
