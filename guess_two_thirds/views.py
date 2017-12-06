@@ -30,8 +30,8 @@ class Guess(Page):
     timeout_submission = {'guess': 50}
 
     def before_next_page(self):
-    if self.timeout_happened:
-        self.player.timeout = True
+        if self.timeout_happened:
+            self.player.timeout = True
 
 
 class ResultsWaitPage(WaitPage):
