@@ -46,7 +46,8 @@ class Results(Page):
     timeout_seconds = 90
 
 
-page_sequence = [IntroductionNovice,
+page_sequence = [ArrivalWaitPage,
+                 IntroductionNovice,
                  IntroductionExpert,
                  Guess,
                  ResultsWaitPage,
