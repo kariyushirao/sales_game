@@ -123,24 +123,24 @@ mturk_hit_settings = {
     'qualification_requirements': [
         # prevents workers from completing again after receiving flag
         {
-            'QualificationTypeID': "3D0GH0GFNJRD8RPXS7G8PLP5O22L3R",
+            'QualificationTypeId': "3D0GH0GFNJRD8RPXS7G8PLP5O22L3R",
             'Comparator': "DoesNotExist",
         },
         # requires workers be located in the US
         {
-            'QualificationTypeID': '00000000000000000071',
+            'QualificationTypeId': '00000000000000000071',
             'Comparator': "EqualTo",
             'LocaleValues': [{'Country': "US"}],
         },
         # requires workers to have completed at least 5 HITs
         {
-            'QualificationTypeID': '00000000000000000040',
+            'QualificationTypeId': '00000000000000000040',
             'Comparator': "GreaterThan",
             'IntegerValues': [5],
         },
         # requires workers to have HIT approval rate of at least 95 percent
         {
-            'QualificationTypeID': '000000000000000000L0',
+            'QualificationTypeId': '000000000000000000L0',
             'Comparator': "GreaterThanOrEqualTo",
             'IntegerValues': [95],
         },
