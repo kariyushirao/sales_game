@@ -119,7 +119,7 @@ mturk_hit_settings = {
     'minutes_allotted_per_assignment': 10,
     'expiration_hours': 1*24, # 1 day
     # flags workers once they've completed the task (sandbox ID)
-    #'grant_qualification_id': '3TBOPHETGJKON9TEO7236BKDIO22LX',
+    'grant_qualification_id': '3TBOPHETGJKON9TEO7236BKDIO22LX',
     'qualification_requirements': [
         # prevents workers from completing again after receiving flag
         {
@@ -130,19 +130,19 @@ mturk_hit_settings = {
         {
             'QualificationTypeID': '00000000000000000071',
             'Comparator': "EqualTo",
-            'LocaleValues': ['Country': "US"],
+            'LocaleValues': [{'Country': "US"}],
         },
         # requires workers to have completed at least 5 HITs
         {
             'QualificationTypeID': '00000000000000000040',
             'Comparator': "GreaterThan",
-            'IntegerValues': 5,
+            'IntegerValues': [5],
         },
         # requires workers to have HIT approval rate of at least 95 percent
         {
             'QualificationTypeID': '000000000000000000L0',
             'Comparator': "GreaterThanOrEqualTo",
-            'IntegerValues': 95,
+            'IntegerValues': [95],
         },
     ]
 }
