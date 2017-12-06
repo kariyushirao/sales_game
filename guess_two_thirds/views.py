@@ -26,8 +26,12 @@ class Guess(Page):
     form_model = models.Player
     form_fields = ['guess']
 
-    timeout_seconds = 60
+    timeout_seconds = 30
     timeout_submission = {'guess': 50}
+
+    def before_next_page(self):
+    if self.timeout_happened:
+        self.player.timeout = True
 
 
 class ResultsWaitPage(WaitPage):
@@ -43,7 +47,7 @@ class Results(Page):
 
         return {'sorted_guesses': sorted_guesses}
 
-    timeout_seconds = 90
+    timeout_seconds = 30
 
 
 page_sequence = [ArrivalWaitPage,

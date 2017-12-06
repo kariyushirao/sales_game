@@ -69,4 +69,5 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     guess = models.PositiveIntegerField(max=Constants.guess_max)
     is_winner = models.BooleanField(initial=False)
+    timeout = models.BooleanField(initial=False)
 
