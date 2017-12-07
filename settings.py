@@ -122,13 +122,13 @@ mturk_hit_settings = {
     'minutes_allotted_per_assignment': 10,
     'expiration_hours': 1*24, # 1 day
     # flags workers once they've completed the task (sandbox ID)
-    #'grant_qualification_id': '3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK',
+    'grant_qualification_id': '3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK',
     'qualification_requirements': [
         # prevents workers from completing again after receiving flag
-        # {
-        #     'QualificationTypeId': "3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK",
-        #     'Comparator': "DoesNotExist",
-        # },
+        {
+            'QualificationTypeId': "3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK",
+            'Comparator': "DoesNotExist",
+        },
         # requires workers be located in the US
         {
             'QualificationTypeId': '00000000000000000071',
