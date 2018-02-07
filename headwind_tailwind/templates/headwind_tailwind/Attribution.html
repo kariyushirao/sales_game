@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Follow up questions
+{% endblock %}
+
+{% block content %}
+
+    <p><big>
+        Considering the investment task you just performed, what strategy did you learn
+        as you performed the task?  Give advice to new investors that would help them
+        maximize their profits as they perform the task.  Make your advice as precise as 
+        possible, so that they will be able to earn as much as they can.<br>
+    </p></big>
+
+    {% formfield player.advice with label="" %}
+
+    <br>
+    <p><big>
+        The investment task you performed was designed to be similar to real investment tasks 
+        that individuals and funds perform to earn money for themselves and for their 
+        clients.  In tasks like this there is always a "luck factor" and a "skill factor".
+        Some things that determine your overall profits are out of your control and should
+        be considered "luck"; other factors depend on your decisions and your skill in the 
+        investment task.  <br><br>
+        In the task you just completed, how much of your final "bottom line profit" was 
+        due to your own skill, and how much was due to chance factors that were out of
+        your control?<br>
+    </p></big>
+
+
+        <div class="slider-start", style="float:left; padding:5px"><strong>All Chance  </strong></div>
+        <div class="slider", style="float:left;width:400px;padding: 5px">
+            {% formfield player.luck_or_skill with label="" %}
+        </div>
+        <div class="slider-end", style="padding:5px"><strong>  All Skill</strong></div>
+
+
+
+    <br><br>
+    <big>Please click "Next" to move on to the next task.
+    <br><br></big>
+
+    {% next_button %}
+
+{% endblock %}

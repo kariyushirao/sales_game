@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    <h3>Results of your Month {{ round_number }} investment</h3>
+{% endblock %}
+
+{% block content %}
+	<div style="float:none; width: 900px; margin: 0 auto; height: 475px;">	
+	    <big><big>Over the course of the month, the value of each type of asset may increase or decrease.  
+	    Here's what happened to the value of any investments you made in each type of asset.</big></big>
+	    <br><br>
+
+    	<!-- LEFT ASSET BOX -->
+		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
+		<p style="text-align:center;"><big><strong>{{ Constants.asset_a_name }}</strong></big></p>
+		<br><p style="text-align:left;"><big>Prior investment value: <br><strong>{{ asset_a_prior }}</strong>
+		<br>Investment made this month: <br><strong>{{ asset_a_purchase }}</strong>
+		<br>Current investment value: <br><strong>{{ asset_a_holdings }}</strong></big></p>
+		</div>
+
+		<!-- CENTER ASSET BOX -->
+		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
+		<p style="text-align:center;"><big><strong>{{ Constants.asset_b_name }}</strong></p>
+		<br><p style="text-align:left;">Prior investment value: <br><strong>{{ asset_b_prior }}</strong>
+		<br>Investment made this month: <br><strong>{{ asset_b_purchase }}</strong>
+		<br>Current investment value: <br><strong>{{ asset_b_holdings }}</strong></big></p>
+		</div>
+
+		<!-- RIGHT ASSET BOX -->
+		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
+		<p style="text-align:center;"><big><strong>{{ Constants.asset_c_name }}</strong></p>
+		<br><p style="text-align:left;">Prior investment value: <br><strong>{{ asset_c_prior }}</strong>
+		<br>Investment made this month: <br><strong>{{ asset_c_purchase }}</strong>
+		<br>Current investment value: <br><strong>{{ asset_c_holdings }}</strong></big></p>
+		</div>
+
+		<!-- PORTFOLIO VALUE BOX -->
+		<div style="width:650px;height:110px;border:3px solid #000; float:left; padding:10px; margin:10px">
+		<p style="text-align:left;"><big><strong>At the beginning of Month {{ round_number }} 
+			your total holdings were worth: {{ inv_prev_balance }}<br><br>
+			At the end of Month {{ round_number }} your total holdings were worth: {{ inv_port_balance }}
+			</strong></big></p>
+		</div>
+
+		
+	</div>
+
+    {% next_button %}
+
+{% endblock %}

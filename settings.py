@@ -63,7 +63,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+USE_POINTS = False
 
 
 # e.g. en, de, fr, it, ja, zh-hans
@@ -172,12 +172,6 @@ SESSION_CONFIGS = [
         'use_browser_bots': False
     },
     {
-        'name': 'my_simple_survey',
-        'display_name': "My Simple Survey",
-        'num_demo_participants': 3,
-        'app_sequence': ['my_simple_survey'],
-    },
-    {
         'name': 'public_goods',
         'display_name': "Public Goods",
         'num_demo_participants': 3,
@@ -222,11 +216,44 @@ SESSION_CONFIGS = [
         'app_sequence': ['guess_two_thirds', 'payment_info'],
     },
     {
-        'name': 'survey',
-        'display_name': "Survey",
+        'name': 'headwind_tailwind',
+        'display_name': "Headwind Tailwind",
         'num_demo_participants': 1,
-        'app_sequence': ['survey', 'payment_info'],
+        'app_sequence': ['headwind_tailwind','snowy_pictures', 'survey'],
     },
+    {
+        'name': 'headwind_tailwind_hw',
+        'treatment': 'headwind',
+        'display_name': "Headwind Tailwind (Headwind)",
+        'num_demo_participants': 1,
+        'app_sequence': ['headwind_tailwind'],
+    },
+    {
+        'name': 'headwind_tailwind_tw',
+        'treatment': 'tailwind',
+        'display_name': "Headwind Tailwind (Tailwind)",
+        'num_demo_participants': 1,
+        'app_sequence': ['headwind_tailwind'],
+    },
+    {
+        'name': 'headwind_tailwind_ne',
+        'treatment': 'neutral',
+        'display_name': "Headwind Tailwind (Neutral)",
+        'num_demo_participants': 1,
+        'app_sequence': ['headwind_tailwind'],
+    },
+    {
+        'name': 'snowy_pictures',
+        'display_name': "Snowy Pictures",
+        'num_demo_participants': 1,
+        'app_sequence': ['snowy_pictures'],
+    },
+    # {
+    #     'name': 'survey',
+    #     'display_name': "Survey",
+    #     'num_demo_participants': 1,
+    #     'app_sequence': ['survey', 'payment_info'],
+    # },
     {
         'name': 'quiz',
         'display_name': "Quiz",
