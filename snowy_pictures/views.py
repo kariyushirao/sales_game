@@ -15,13 +15,13 @@ class JudgePicture(Page):
 
 	def vars_for_template(self):
 		return {
-			'image_path': 'snowy_pictures/pictures/{}.png'.format(self.round_number)
+			'image_path': 'snowy_pictures/pictures/{}.png'.format(self.player.image_id)
         }
 
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number >= 4
+        return self.round_number >= 24
 
 
 page_sequence = [

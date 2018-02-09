@@ -7,30 +7,30 @@
 
 {% block content %}
     <div style="float:none; width: 900px; margin: 0 auto; height: 475px;">
-    	<big><big>Choose how much you'd like to invest in each asset.  You may invest all or part of your monthly budget 
-		of <strong>{{ Constants.monthly_budget }}</strong>.</big></big><br><br>
+    	Choose how much you'd like to invest in each asset.  You may invest all or part of your monthly budget 
+		of <strong>{{ Constants.monthly_budget }}</strong>.<br><br>
     	
     	<!-- LEFT ASSET BOX -->
 		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
-		<p style="text-align:center;"><big><strong>{{ Constants.asset_a_name }}</strong></big></p>
-		<br><br><p style="text-align:left;"><big>Current investment value: <strong>{{ asset_a_holdings }}</strong></big></p>
+		<p style="text-align:center;"><strong>{{ Constants.asset_a_name }}</strong></p>
+		<br><br><p style="text-align:left;">Current investment value: <strong>{{ asset_a_holdings }}</strong></p>
 		</div>
 
 		<!-- CENTER ASSET BOX -->
 		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
-		<p style="text-align:center;"><big><strong>{{ Constants.asset_b_name }}</strong></big></p>
-		<br><br><p style="text-align:left;"><big>Current investment value: <strong>{{ asset_b_holdings }}</strong></big></p>
+		<p style="text-align:center;"><strong>{{ Constants.asset_b_name }}</strong></p>
+		<br><br><p style="text-align:left;">Current investment value: <strong>{{ asset_b_holdings }}</strong></p>
 		</div>
 
 		<!-- RIGHT ASSET BOX -->
 		<div style="width:260px;height:230px;border:3px solid #000; float:left; padding:10px; margin:16px">
-		<p style="text-align:center;"><big><strong>{{ Constants.asset_c_name }}</strong></big></p>
-		<br><br><p style="text-align:left;"><big>Current investment value: <strong>{{ asset_c_holdings }}</strong></big></p>
+		<p style="text-align:center;"><strong>{{ Constants.asset_c_name }}</strong></big></p>
+		<br><br><p style="text-align:left;">Current investment value: <strong>{{ asset_c_holdings }}</strong></p>
 		</div>
 
 		<!-- MONTHLY BUDGET BOX -->
 		<div style="width:260px;height:100px;border:3px solid #000; float:left; padding:10px; margin:10px">
-		<p style="text-align:left;"><big><strong>Available budget: </strong>{{ Constants.monthly_budget }}</big></p>
+		<p style="text-align:left;"><strong>Available budget: </strong>{{ Constants.monthly_budget }}</p>
 		</div>
 
 		<!-- SPACER -->
@@ -38,15 +38,14 @@
 
 		<!-- PORTFOLIO VALUE BOX -->
 		<div style="width:260px;height:100px;border:3px solid #000; float:left; padding:10px; margin:10px">
-		<p style="text-align:left;"><big><strong>Value of portfolio: </strong>{{ inv_port_balance }}</big></p>
+		<p style="text-align:left;"><strong>Value of portfolio: </strong>{{ inv_port_balance }}</p>
 		</div>
 
 	</div>
-	<big>
     {% formfield player.asset_a_purchase with label="How much would you like to invest in GOLD?" %}
     {% formfield player.asset_b_purchase with label="How much would you like to invest in OIL?" %}
     {% formfield player.asset_c_purchase with label="How much would you like to invest in STOCKS?" %}
-	</big>
+
     {% next_button %}
 
 {% endblock %}

@@ -4,6 +4,9 @@ from otree.api import Currency as c, currency_range
 from .models import Constants
 
 
+class Instructions(Page):
+	pass
+
 class Demographics(Page):
     form_model = models.Player
     form_fields = ['age',
@@ -18,6 +21,7 @@ class CognitiveReflectionTest(Page):
 
 
 page_sequence = [
-    Demographics,
-    CognitiveReflectionTest
+    Instructions,
+    CognitiveReflectionTest,
+    Demographics
 ]

@@ -114,19 +114,19 @@ ROOMS = [
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
 mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study'],
-    'title': '5-Minute Decision Making Experiment',
-    'description': 'A brief experiment on decision making.  Some participants may work in groups.',
+    'keywords': ['easy', 'bonus', 'choice', 'study', 'short', 'experiment'],
+    'title': 'Three brief decision making exercises',
+    'description': 'A brief experiment on decision making. Less than 25 minutes to complete.',
     'frame_height': 500,
     'preview_template': 'global/MTurkPreview.html',
-    'minutes_allotted_per_assignment': 10,
+    'minutes_allotted_per_assignment': 60,
     'expiration_hours': 1*24, # 1 day
-    # flags workers once they've completed the task (sandbox ID)
-    'grant_qualification_id': '3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK',
+    # flags workers once they've completed the task (currently set to headwind-tailwind)
+    'grant_qualification_id': '394TT8DUT8F2CX4VMOJQL8T3GY0ZTA',
     'qualification_requirements': [
-        # prevents workers from completing again after receiving flag
+        # prevents workers from completing headwind-tailwind again after receiving flag
         {
-            'QualificationTypeId': "3DIIQAIHOOI6QLVWGWU8ZKSMV2ATTK",
+            'QualificationTypeId': "394TT8DUT8F2CX4VMOJQL8T3GY0ZTA",
             'Comparator': "DoesNotExist",
         },
         # requires workers be located in the US
@@ -158,7 +158,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.001,
-    'participation_fee': 1.00,
+    'participation_fee': 2.50,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -226,14 +226,14 @@ SESSION_CONFIGS = [
         'treatment': 'headwind',
         'display_name': "Headwind Tailwind (Headwind)",
         'num_demo_participants': 1,
-        'app_sequence': ['headwind_tailwind'],
+        'app_sequence': ['headwind_tailwind','snowy_pictures', 'survey'],
     },
     {
         'name': 'headwind_tailwind_tw',
         'treatment': 'tailwind',
         'display_name': "Headwind Tailwind (Tailwind)",
         'num_demo_participants': 1,
-        'app_sequence': ['headwind_tailwind'],
+        'app_sequence': ['headwind_tailwind', 'snowy_pictures', 'survey'],
     },
     {
         'name': 'headwind_tailwind_ne',

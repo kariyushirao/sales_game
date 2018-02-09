@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block content %}
-	<big>The final balance of your investment portfolio is <strong>{{ inv_port_balance }}</strong>.  You are 
-	currently ranked in the bottom 30% of the {{ num_participants }} participants who have completed this
+	The final balance of your investment portfolio is <strong>{{ inv_port_balance }}</strong>.  You are 
+	currently ranked in the <strong>bottom 30%</strong> of the {{ num_participants }} participants who have completed this
 	investment game so far.  Once all participants have completed this investment game, we will determine your
-	final rank.  If your final rank is in the top 10% of all participants, you will receive a $2.00 bonus.
+	final rank.  <strong>If your final rank is in the top 10% of all participants, you will receive a $2.00 bonus.</strong>
 	<br><br>
 	Please click "Next" to complete this section by answering a couple follow up questions.
-	<br><br></big>
+	<br><br>
     {% next_button %}
 
 {% endblock %}

@@ -17,7 +17,7 @@ they've chosen to invest the previous month.
 
 class Constants(BaseConstants):
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 12
     name_in_url = 'investment_12_months'
 
     # how much $$ participants may invest every round

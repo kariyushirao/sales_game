@@ -81,7 +81,7 @@ class Results(Page):
 
 class ResultsTailwind(Page):
     def is_displayed(self):
-        return self.round_number >= 2 and self.participant.vars['treatment'] == 'tailwind'
+        return self.round_number >= 12 and self.participant.vars['treatment'] == 'tailwind'
 
     def vars_for_template(self):
         return {
@@ -92,7 +92,7 @@ class ResultsTailwind(Page):
 
 class ResultsNeutral(Page):
     def is_displayed(self):
-            return self.round_number >= 2 and self.participant.vars['treatment'] == 'neutral'
+            return self.round_number >= 12 and self.participant.vars['treatment'] == 'neutral'
 
     def vars_for_template(self):
         return {
@@ -103,7 +103,7 @@ class ResultsNeutral(Page):
 
 class ResultsHeadwind(Page):
     def is_displayed(self):
-        return self.round_number >= 2 and self.participant.vars['treatment'] == 'headwind'
+        return self.round_number >= 12 and self.participant.vars['treatment'] == 'headwind'
 
     def vars_for_template(self):
         return {
@@ -117,7 +117,7 @@ class Attribution(Page):
     form_fields = ['advice','luck_or_skill']
 
     def is_displayed(self):
-        return self.round_number >= 2
+        return self.round_number >= 12
 
 page_sequence = [Introduction,
                  Invest,
