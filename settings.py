@@ -96,9 +96,9 @@ DEMO_PAGE_INTRO_TEXT = """
 
 ROOMS = [
     {
-        'name': 'CDR',
-        'display_name': 'Center for Decision Research',
-        'participant_label_file': '_rooms/econ101.txt',
+        'name': 'RaoWebLab',
+        'display_name': 'Rao Web Lab',
+        # 'participant_label_file': '_rooms/econ101.txt',
     },
     {
         'name': 'live_demo',
@@ -247,6 +247,12 @@ SESSION_CONFIGS = [
         'display_name': "Snowy Pictures",
         'num_demo_participants': 1,
         'app_sequence': ['snowy_pictures'],
+    },
+    {
+        'name': 'coin_flipping',
+        'display_name': "Coin Flipping",
+        'num_demo_participants': 1,
+        'app_sequence': ['coin_flipping'],
     },
     # {
     #     'name': 'survey',

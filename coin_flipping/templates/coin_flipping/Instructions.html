@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+    <div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Coin Flipping Task
+    </h3>
+
+    <p>
+        In this task you will watch our fair coin simulator flip a fair coin eight times.  At the end
+        of every eighth flip, you will be asked to predict what side the coin will land on next.  After
+        you make your prediction about the ninth flip, the simulator will restart and flip the coin another
+        8 times.  This process will repeat 11 times, so you will watch the simulator produce 11 sequences of 
+        8 flips, and make a prediction after each of these 11 sequences.
+    </p>
+
+</div>
+
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Coin Flipping Task: Round {{ subsession.round_number }}/{{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+	<p>
+        The fair coin simulator is now showing you 8 flips of a fair coin.  Wait until
+        you have seen the result of all eight flips, then make your prediction about what
+        side the coin will land on next by selecting "Heads" if you think it will land on heads 
+        next, and "Tails" if you think it will land on tails next.
+    </p>
+
+    <div>
+        <img style="height:400px" img src="{% static image_path %}"/>
+    </div>
+
+    {% formfield player.flip_prediction with label="" %}
+
+    {% next_button %}
+
+{% endblock %}

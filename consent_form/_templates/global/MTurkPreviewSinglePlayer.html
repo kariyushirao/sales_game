@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree_tags %}
+
+{% block title %}Please read this before clicking "Accept"{% endblock %}
+
+{% block content %}
+    <div class="panel panel-danger">
+        <div class="panel-heading">Attention!</div>
+        <div class="panel-body">
+            Please accept this HIT only if you are going to work on it <b>immediately</b>.
+        </div>
+    </div>
+    <p>
+        This HIT is a brief (5 min.) study about interactive experiments in Amazon Mechanical Turk conducted by the
+        researchers
+        from the University of Zürich.
+    </p>
+    <p>
+        In case of any issues, please contact us via:
+        <a href="mailto:chapkovskii@soziologie.uzh.ch" target="_top">chapkovskii@soziologie.uzh.ch</a>
+    </p>
+{% endblock %}

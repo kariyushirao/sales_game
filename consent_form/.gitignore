@@ -1,0 +1,13 @@
+venv
+*.pyc
+staticfiles
+./db.sqlite3
+.idea
+*~
+*.sqlite3
+_coverage_results/
+/latest.dump.1
+/latest.dump
+__pycache__/
+
+latest.dump.1

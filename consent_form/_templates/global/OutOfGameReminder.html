@@ -1,0 +1,13 @@
+{% load humanize %}
+<div class="bs-callout bs-callout-info">
+    <h4>Important info</h4>
+
+
+    <p>On average the waiting time for other participants is less than 1 minute. </p>
+    <p>If you don’t want to wait, you can quit the waiting page immediately, and <b>RETURN THIS HIT</b>.</p>
+    <p>If you choose to wait and other participants will not be here in <b>{{ OOG_time_minutes }}
+        minute{{ OOG_time_minutes|pluralize }}</b>,
+        you will be able to <b>finish this study</b> and receive the participation fee of {{ session.config.participation_fee }}.</p>
+    <p>
+    </p>
+</div>

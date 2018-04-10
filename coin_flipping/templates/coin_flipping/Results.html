@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Thanks!
+{% endblock %}
+
+{% block content %}
+	
+	Thanks for playing our coin flipping game!
+	<br><br>
+
+	Please click the "Next" button to move on to the final task.
+	<br><br>
+
+    {% next_button %}
+{% endblock %}
+
+
