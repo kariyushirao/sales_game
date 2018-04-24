@@ -9,18 +9,38 @@ class Instructions(Page):
         return self.round_number == 1
 
 
-class PredictFlip(Page):
-	form_model = models.Player
-	form_fields = ['flip_prediction']
+class PredictFlipSlider(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'slider'
+
+    form_model = models.Player
+    form_fields = ['flip_prediction_slider']
 
     # def flip_prediction_choices(self):
     #     choices = ['Heads', 'Tails']
     #     random.shuffle(choices)
     #     return choices
 
-	def vars_for_template(self):
-		return {
+    def vars_for_template(self):
+        return {
 			'image_path': 'coin_flipping/pictures/{}.gif'.format(self.player.image_id)
+        }
+
+class PredictFlipRadial(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'radial'
+
+    form_model = models.Player
+    form_fields = ['flip_prediction_radial']
+
+    # def flip_prediction_choices(self):
+    #     choices = ['Heads', 'Tails']
+    #     random.shuffle(choices)
+    #     return choices
+
+    def vars_for_template(self):
+        return {
+            'image_path': 'coin_flipping/pictures/{}.gif'.format(self.player.image_id)
         }
 
 
@@ -31,6 +51,7 @@ class Results(Page):
 
 page_sequence = [
     Instructions,
-    PredictFlip,
+    PredictFlipSlider,
+    PredictFlipRadial,
     Results
 ]

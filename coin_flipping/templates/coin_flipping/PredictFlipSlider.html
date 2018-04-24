@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Coin Flipping Task: Round {{ subsession.round_number }}/{{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+	<p>
+        <strong>Here is a fresh coin.</strong><br><br>
+        You are now watching 8 flips of a fair coin.  Wait until
+        you have seen the result of all eight flips, then use the sliding scale to make 
+        your prediction about what side the coin will land on next. 
+    </p>
+
+    <div>
+        <img style="height:400px" img src="{% static image_path %}"/>
+    </div>
+
+
+    <p>What is the probability that the next flip will land on <strong>HEADS?<strong></p>
+    <div class="slider-start", style="float:left; padding:5px"><strong>0%  </strong></div>
+        <div class="slider", style="float:left;width:400px;padding: 5px">
+            {% formfield player.flip_prediction_slider with label="" %}
+        </div>
+        <div class="slider-end", style="padding:5px"><strong>100%</strong></div>
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}

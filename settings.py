@@ -114,19 +114,19 @@ ROOMS = [
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
 mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study', 'short', 'experiment'],
-    'title': 'Three brief decision making exercises',
-    'description': 'A brief experiment on decision making. Less than 25 minutes to complete.',
+    'keywords': ['easy', 'brief', 'choice', 'prediction', 'study', 'short', 'experiment'],
+    'title': 'Quick game with short survey',
+    'description': 'A quick experiment about making predictions in games. Less than 15 minutes to complete.',
     'frame_height': 500,
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 1*24, # 1 day
     # flags workers once they've completed the task (currently set to headwind-tailwind)
-    'grant_qualification_id': '394TT8DUT8F2CX4VMOJQL8T3GY0ZTA',
+    'grant_qualification_id': '3X9X2XMJQ4N5FSVZQJYM8O7IHI0QLB',
     'qualification_requirements': [
         # prevents workers from completing headwind-tailwind again after receiving flag
         {
-            'QualificationTypeId': "394TT8DUT8F2CX4VMOJQL8T3GY0ZTA",
+            'QualificationTypeId': "3X9X2XMJQ4N5FSVZQJYM8O7IHI0QLB",
             'Comparator': "DoesNotExist",
         },
         # requires workers be located in the US
@@ -158,7 +158,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.001,
-    'participation_fee': 2.50,
+    'participation_fee': 2.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -252,7 +252,7 @@ SESSION_CONFIGS = [
         'name': 'coin_flipping',
         'display_name': "Coin Flipping",
         'num_demo_participants': 1,
-        'app_sequence': ['coin_flipping'],
+        'app_sequence': ['coin_flipping','FIT'],
     },
     # {
     #     'name': 'survey',
@@ -265,6 +265,12 @@ SESSION_CONFIGS = [
         'display_name': "Quiz",
         'num_demo_participants': 1,
         'app_sequence': ['quiz'],
+    },
+    {   
+        'name': 'FIT',
+        'display_name': "FIT",
+        'num_demo_participants': 1,
+        'app_sequence': ['FIT'],
     },
     {
         'name': 'prisoner',

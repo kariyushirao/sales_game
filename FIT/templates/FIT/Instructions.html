@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Task 2/2
+{% endblock %}
+
+{% block content %}
+
+    <div class="instructions well well-lg">
+
+    <p>
+        We have just a few quick questions about you before we wrap up this HIT.  We'd like you to 
+        read a few statements, and let us know how well each statement describes you.  These will not
+        take very long at all (there are no open response questions, just sliding scales). 
+        Please click "Next" to continue.
+    </p>
+
+</div>
+
+
+    {% next_button %}
+
+{% endblock %}

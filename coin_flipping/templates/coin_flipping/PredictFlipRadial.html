@@ -8,7 +8,8 @@
 {% block content %}
 
 	<p>
-        The fair coin simulator is now showing you 8 flips of a fair coin.  Wait until
+        <strong>Here is a fresh coin.</strong><br><br>
+        You are now watching 8 flips of a fair coin.  Wait until
         you have seen the result of all eight flips, then make your prediction about what
         side the coin will land on next by selecting "Heads" if you think it will land on heads 
         next, and "Tails" if you think it will land on tails next.
@@ -18,7 +19,8 @@
         <img style="height:400px" img src="{% static image_path %}"/>
     </div>
 
-    {% formfield player.flip_prediction with label="" %}
+    <p>What side will the coin land on next?</p>
+    {% formfield player.flip_prediction_radial with label="" %}
 
     {% next_button %}
 

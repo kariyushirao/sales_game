@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+	<p>How well does the below statement describe you?<p><br>
+		<strong>{{ player.question }}<strong><br><br>
+		<div class="slider-start", style="float:left; padding:5px"><strong>Not well at all</strong></div>
+        <div class="slider", style="float:left;width:400px;padding: 5px">
+            {% formfield player.submitted_answer with label="" %}
+        </div>
+        <div class="slider-end", style="padding:5px"><strong>Perfectly well</strong></div>
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}

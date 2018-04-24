@@ -4,6 +4,7 @@ from otree.api import (
 )
 
 import random
+import itertools
 
 author = 'Kariyushi'
 
@@ -46,7 +47,23 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-	def creating_session(self):    
+	def creating_session(self):
+		treatments = itertools.cycle(['slider','radial'])
+
+		# assigns treatment at the participant level so that same treatment
+        # persists across rounds
+		if self.round_number == 1:
+			for p in self.get_players():
+				if 'treatment' in self.session.config:
+					# demo mode
+					treatment = self.session.config['treatment']
+					p.participant.vars['treatment'] = treatment
+					p.treatment = treatment
+				else: 
+					# live experiment mode
+					treatment = next(treatments)
+					p.participant.vars['treatment'] = treatment
+					p.treatment = treatment
 
 		image_index = self.round_number - 1
 		print(image_index)
@@ -112,9 +129,13 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    flip_prediction = models.IntegerField(
+	treatment = models.CharField()
+	flip_prediction_slider = models.IntegerField(
+    	widget=widgets.Slider(attrs={'step': '1.00'},
+    		show_value=False))
+	flip_prediction_radial = models.IntegerField(
     	choices=[[1, 'Heads'],[2, 'Tails']],
         widget=widgets.RadioSelect
         )
-    image_id = models.CharField()
+	image_id = models.CharField()
 
