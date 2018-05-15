@@ -272,6 +272,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['FIT'],
     },
+    {   
+        'name': 'responsibility_attribution',
+        'display_name': "Responsibility Attribution",
+        'num_demo_participants': 1,
+        'app_sequence': ['responsibility_attribution','demographics'],
+    },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
@@ -408,6 +414,12 @@ SESSION_CONFIGS = [
         'display_name': "Trust Game (simple version from tutorial)",
         'num_demo_participants': 2,
         'app_sequence': ['trust_simple'],
+    },
+    {
+        'name': 'demographics',
+        'display_name': "Demographics",
+        'num_demo_participants': 1,
+        'app_sequence': ['demographics'],
     },
 
 ]

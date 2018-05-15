@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Thank you!
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        That wraps up our HIT.  Thank you so much for taking the time to participate in our study.
+        Please click "Next" to submit this HIT.  
+    </p>
+
+
+    {% next_button %}
+{% endblock %}
+
+
