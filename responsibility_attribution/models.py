@@ -84,6 +84,27 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+	comprehension1 = models.IntegerField(
+        choices=[[1, '5 points'],[2, '7 points'], [3, '4 points']],
+        widget=widgets.RadioSelect
+        )
+	comprehension2 = models.IntegerField(
+        choices=[[1, 'Marking the score with a light gray color'],
+        		[2, 'Marking the score with a black dot'], 
+        		[3, 'Marking the score with a dark red color']],
+        widget=widgets.RadioSelect
+        )
+	comprehension3 = models.IntegerField(
+        choices=[[1, 'Each dot represents one of the points the gymnast earned today'],
+        		[2, 'Each dot represents a score the gymnast earned in a past competition'], 
+        		[3, 'Each dot represents a special move performed by the gymnast']],
+        widget=widgets.RadioSelect
+        )
+	comprehension4 = models.IntegerField(
+        choices=[[1, '5 points'],[2, '7 points'], [3, '2 points']],
+        widget=widgets.RadioSelect
+        )
+
 	stim_id = models.CharField()
 	stim_name = models.CharField()
 	stim_sample = models.IntegerField()

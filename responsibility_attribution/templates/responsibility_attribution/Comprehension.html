@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block content %}
+    <h4 class="panel-sub-heading">Comprehension check</h4>
+    <br>
+    <p>1. What score must the gymnasts earn to move on to the next stage?</p>
+            {% formfield player.comprehension1 with label="" %}
+
+    <p>2. How do the heat maps indicate that a score has been received more often in the past?</p>
+            {% formfield player.comprehension2 with label="" %}
+
+    <p>3. What do the dots in the histogram represent?</p>
+            {% formfield player.comprehension3 with label="" %}
+
+    <p>4. In the example below, what score did this gymnast receive in the current competition?</p>
+    <img style="height:75px; align: center" img src="{% static curr %}"/><br><br>
+            {% formfield player.comprehension4 with label="" %}
+
+    
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}
