@@ -31,4 +31,6 @@ class Player(BasePlayer):
         choices=[[0, 'Male'],[1, 'Female']],
         widget=widgets.RadioSelect
         )
+    prediction = models.TextField()
+    responsibility = models.TextField()
     comments = models.TextField()
