@@ -8,9 +8,22 @@ class Instructions1(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-class Instructions2(Page):
+class Instructions2R(Page):
     def is_displayed(self):
-        return self.round_number == 1
+        return self.round_number == 1 and self.participant.vars['treatment'] == 'random'
+    
+    def vars_for_template(self):
+        return {
+            'dots1': 'responsibility_attribution/pictures/Avis0.png',
+            'dots2': 'responsibility_attribution/pictures/Selle0.png',
+            'heat1': 'responsibility_attribution/pictures/Avis1.png',
+            'heat2': 'responsibility_attribution/pictures/Selle1.png'
+        }
+
+
+class Instructions2E(Page):
+    def is_displayed(self):
+        return self.round_number == 1 and self.participant.vars['treatment'] == 'experience'
 
     def vars_for_template(self):
         return {
@@ -51,7 +64,10 @@ class Comprehension(Page):
         if not (threshold and color and dots and score):
             return 'It looks like you may have answered one or more questions incorrectly.  Please check your answers and correct any mistakes.'
 
-class Prediction(Page):
+class PredictionR(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'random'
+
     form_model = models.Player
     form_fields = ['prediction']
 
@@ -62,7 +78,24 @@ class Prediction(Page):
             'name': self.player.stim_name
         }
 
-class Responsibility(Page):
+class PredictionE(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'experience'
+
+    form_model = models.Player
+    form_fields = ['prediction']
+
+    def vars_for_template(self):
+        return {
+            'dots': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_dots),
+            'heat_map': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_prior),
+            'name': self.player.stim_name
+        }
+
+class ResponsibilityE(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'experience'
+
     form_model = models.Player
     form_fields = ['attribution']
 
@@ -71,9 +104,25 @@ class Responsibility(Page):
             'dots': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_dots),
             'heat_map': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_current),
             'name': self.player.stim_name,
-            'score': self.player.stim_score
+            'score': self.player.stim_score,
+            'outcome': self.player.stim_outcome
         }
 
+class ResponsibilityR(Page):
+    def is_displayed(self):
+        return self.participant.vars['treatment'] == 'random'
+
+    form_model = models.Player
+    form_fields = ['attribution']
+
+    def vars_for_template(self):
+        return {
+            'dots': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_dots),
+            'heat_map': 'responsibility_attribution/pictures/{}.png'.format(self.player.stim_current),
+            'name': self.player.stim_name,
+            'score': self.player.stim_score,
+            'outcome': self.player.stim_outcome
+        }
 
 class Results(Page):
     def is_displayed(self):
@@ -82,10 +131,13 @@ class Results(Page):
 
 page_sequence = [
     Instructions1,
-    Instructions2,
+    Instructions2E,
+    Instructions2R,
     Instructions3,
     Comprehension,
-    Prediction,
-    Responsibility,
+    PredictionE,
+    PredictionR,
+    ResponsibilityE,
+    ResponsibilityR,
     Results
 ]

@@ -22,15 +22,35 @@ class Constants(BaseConstants):
     num_rounds = 3
 
     # stimuli
-    people = {1: {'name': 'Williams', 'sample': 20,'dots': 'Williams0', 'prior': 'Williams1', 'current': 'Williams2', 'score': 7, 'attribute': 'credit', 'affect': 'positive'},
-    		  2: {'name': 'Selle', 'sample': 100, 'dots': 'Selle0','prior': 'Selle1', 'current': 'Selle2', 'score': 3, 'attribute': 'blame', 'affect': 'negative'},
-    		  3: {'name': 'Avis', 'sample': 20, 'dots': 'Avis0','prior': 'Avis1', 'current': 'Avis2', 'score': 9, 'attribute': 'credit', 'affect': 'positive'}}
+    people = {1: {'name': 'Williams', 'sample': 20,'dots': 'Williams0', 'prior': 'Williams1', 'current': 'Williams2', 'score': 7, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  2: {'name': 'Selle', 'sample': 100, 'dots': 'Selle0','prior': 'Selle1', 'current': 'Selle2', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  3: {'name': 'Avis', 'sample': 20, 'dots': 'Avis0','prior': 'Avis1', 'current': 'Avis2', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'}}
 
 
 class Subsession(BaseSubsession):
 	def creating_session(self):
+		treatments = itertools.cycle(['random', 'experience'])
 		image_index = self.round_number - 1
 		print(image_index)
+
+		# assigns treatment at the participant level so that same treatment
+        # persists across rounds
+		if self.round_number == 1:
+			for p in self.get_players():
+				if 'treatment' in self.session.config:
+					# demo mode
+					treatment = self.session.config['treatment']
+					p.participant.vars['treatment'] = treatment
+					p.treatment = treatment
+				else:
+					# live experiment mode
+					treatment = next(treatments)
+					p.participant.vars['treatment'] = treatment
+					p.treatment = treatment
+		else:
+			for p in self.get_players():
+				treatment = p.participant.vars['treatment']
+				p.treatment = treatment
 
 		if self.round_number == 1:
 			for p in self.get_players():
@@ -59,6 +79,7 @@ class Subsession(BaseSubsession):
 				p.stim_prior = people[stim_id]['prior']
 				p.stim_current = people[stim_id]['current']
 				p.stim_score = people[stim_id]['score']
+				p.stim_outcome = people[stim_id]['outcome']
 				p.stim_attribute = people[stim_id]['attribute']
 				p.stim_affect = people[stim_id]['affect']
 		else:
@@ -75,6 +96,7 @@ class Subsession(BaseSubsession):
 				p.stim_prior = people[stim_id]['prior']
 				p.stim_current = people[stim_id]['current']
 				p.stim_score = people[stim_id]['score']
+				p.stim_outcome = people[stim_id]['outcome']
 				p.stim_attribute = people[stim_id]['attribute']
 				p.stim_affect = people[stim_id]['affect']
 	    	
@@ -112,6 +134,7 @@ class Player(BasePlayer):
 	stim_prior = models.CharField()
 	stim_current = models.CharField()
 	stim_score = models.CharField()
+	stim_outcome = models.CharField()
 	stim_attribute = models.CharField()
 	stim_affect = models.CharField()
 

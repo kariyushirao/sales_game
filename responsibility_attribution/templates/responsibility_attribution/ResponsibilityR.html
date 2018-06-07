@@ -58,7 +58,7 @@
 {% endblock %}
 
 {% block title %}
-    Gymnast {{ subsession.round_number }}/{{ Constants.num_rounds }}: {{player.stim_name}}
+    Gymnast {{ subsession.round_number }}/{{ Constants.num_rounds }}: {{name}}
 {% endblock %}
 
 {% block content %}
@@ -69,7 +69,7 @@
     </p>
 
     <div style="float:none; width: 500px; margin: 0 auto; height: 350px;">
-        <p style="text-align:center;"><strong><big>Sample of <b>{{ player.stim_sample }} of {{player.stim_name}}'s past competitions</b></big></strong></p>
+        <p style="text-align:center;"><strong><big>Sample of <b>{{ player.stim_sample }} of {{name}}'s past competitions</b></big></strong></p>
         <img style="height:300px" img src="{% static dots %}"/><br><br>
     </div><br>
 
@@ -79,11 +79,11 @@
     </p>
 
     <div style="float:none; width: 550px; margin: 0 auto; height: 200px;">
-        <p style="text-align:center;"><strong><big>{{ player.stim_name }}'s score today: {{ player.stim_score }} points</big></strong></p>
+        <p style="text-align:center;"><strong><big>{{ name }}'s score today: {{ score }} points [{{ outcome }}]</big></strong></p>
         <img style="height:100px" img src="{% static heat_map %}"/>
     </div>
 
-    <p style="text-align:center;"><strong>How much <u>{{player.stim_attribute}}</u> should {{ player.stim_name }} receive for this 
+    <p style="text-align:center;"><strong>How much <u>{{player.stim_attribute}}</u> should {{ name }} receive for this 
     <u>{{player.stim_affect}}</u> outcome?</strong><br>(Click on the slider bar to make the selector button appear.)</p>
             
     <div style="float:center; width: 525px; margin: 0 auto; padding: 5px">

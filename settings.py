@@ -278,6 +278,20 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['responsibility_attribution','demographics'],
     },
+    {   
+        'name': 'responsibility_attribution_e',
+        'treatment': 'experience',
+        'display_name': "Responsibility Attribution (Experience)",
+        'num_demo_participants': 1,
+        'app_sequence': ['responsibility_attribution','demographics'],
+    },
+    {   
+        'name': 'responsibility_attribution_r',
+        'treatment': 'random',
+        'display_name': "Responsibility Attribution (Random)",
+        'num_demo_participants': 1,
+        'app_sequence': ['responsibility_attribution','demographics'],
+    },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
