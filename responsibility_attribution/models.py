@@ -19,12 +19,52 @@ for that outcome.
 class Constants(BaseConstants):
     name_in_url = 'responsibility_attribution'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 42
 
     # stimuli
-    people = {1: {'name': 'Williams', 'sample': 20,'dots': 'Williams0', 'prior': 'Williams1', 'current': 'Williams2', 'score': 7, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
-    		  2: {'name': 'Selle', 'sample': 100, 'dots': 'Selle0','prior': 'Selle1', 'current': 'Selle2', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
-    		  3: {'name': 'Avis', 'sample': 20, 'dots': 'Avis0','prior': 'Avis1', 'current': 'Avis2', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'}}
+    people = {1: {'name': 'Page', 'sample': 20,'dots': 'dotplot_alpha_5_beta_5_n_20', 'prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_1', 'score': 1, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  2: {'name': 'Nelson', 'sample': 100, 'dots': 'dotplot_alpha_5_beta_5_n_100','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_1', 'score': 1, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  3: {'name': 'Williams', 'sample': 20, 'dots': 'dotplot_alpha_5_beta_5_n_20','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  4: {'name': 'Guerrieri', 'sample': 100, 'dots': 'dotplot_alpha_5_beta_5_n_100','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  5: {'name': 'Moncher', 'sample': 20, 'dots': 'dotplot_alpha_5_beta_5_n_20','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  6: {'name': 'Selle', 'sample': 100, 'dots': 'dotplot_alpha_5_beta_5_n_100','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  7: {'name': 'Richards', 'sample': 20, 'dots': 'dotplot_alpha_5_beta_5_n_20','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  8: {'name': 'Nichols', 'sample': 100, 'dots': 'dotplot_alpha_5_beta_5_n_100','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  9: {'name': 'Conca', 'sample': 20,'dots': 'dotplot_alpha_3_beta_7_n_20', 'prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_1', 'score': 1, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  10: {'name': 'Millican', 'sample': 100, 'dots': 'dotplot_alpha_3_beta_7_n_100','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_1', 'score': 1, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  11: {'name': 'Manguso', 'sample': 20, 'dots': 'dotplot_alpha_3_beta_7_n_20','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  12: {'name': 'Avis', 'sample': 100, 'dots': 'dotplot_alpha_3_beta_7_n_100','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  13: {'name': 'Wilson', 'sample': 20, 'dots': 'dotplot_alpha_3_beta_7_n_20','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  14: {'name': 'Ochsner', 'sample': 100, 'dots': 'dotplot_alpha_3_beta_7_n_100','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  15: {'name': 'Boyd', 'sample': 20, 'dots': 'dotplot_alpha_3_beta_7_n_20','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  16: {'name': 'Yaklich', 'sample': 100, 'dots': 'dotplot_alpha_3_beta_7_n_100','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  17: {'name': 'Carmichael', 'sample': 20,'dots': 'dotplot_alpha_7_beta_3_n_20', 'prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_1', 'score': 1, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  18: {'name': 'Reinhardt', 'sample': 100, 'dots': 'dotplot_alpha_7_beta_3_n_100','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_1', 'score': 1, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  19: {'name': 'Rosendahl', 'sample': 20, 'dots': 'dotplot_alpha_7_beta_3_n_20','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  20: {'name': 'Mack', 'sample': 100, 'dots': 'dotplot_alpha_7_beta_3_n_100','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  21: {'name': 'Appleby', 'sample': 20, 'dots': 'dotplot_alpha_7_beta_3_n_20','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  22: {'name': 'Montle', 'sample': 100, 'dots': 'dotplot_alpha_7_beta_3_n_100','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  23: {'name': 'Figueroa', 'sample': 20, 'dots': 'dotplot_alpha_7_beta_3_n_20','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  24: {'name': 'Rossi', 'sample': 100, 'dots': 'dotplot_alpha_7_beta_3_n_100','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_9', 'score': 9, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  25: {'name': 'Gilsdorf', 'sample': 20,'dots': 'dotplot_alpha_5_beta_5_n_20', 'prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_5', 'score': 5, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  26: {'name': 'Braley', 'sample': 100, 'dots': 'dotplot_alpha_5_beta_5_n_100','prior': 'alpha_6_beta_6', 'current': 'alpha_6_beta_6_points_5', 'score': 5, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  27: {'name': 'Kirby', 'sample': 20,'dots': 'dotplot_alpha_3_beta_7_n_20', 'prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_4', 'score': 4, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  28: {'name': 'Walters', 'sample': 100, 'dots': 'dotplot_alpha_3_beta_7_n_100','prior': 'alpha_3_beta_7', 'current': 'alpha_3_beta_7_points_4', 'score': 4, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  29: {'name': 'Winten', 'sample': 20,'dots': 'dotplot_alpha_7_beta_3_n_20', 'prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_6', 'score': 6, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  30: {'name': 'Butler', 'sample': 100, 'dots': 'dotplot_alpha_7_beta_3_n_100','prior': 'alpha_7_beta_3', 'current': 'alpha_7_beta_3_points_6', 'score': 6, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  31: {'name': 'Sandoval', 'sample': 20,'dots': 'dotplot_alpha_1.5_beta_3.5_n_20', 'prior': 'alpha_1.5_beta_3.5', 'current': 'alpha_1.5_beta_3.5_points_2', 'score': 2, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  32: {'name': 'Ekberg', 'sample': 100, 'dots': 'dotplot_alpha_1.5_beta_3.5_n_100','prior': 'alpha_1.5_beta_3.5', 'current': 'alpha_1.5_beta_3.5_points_4', 'score': 4, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  33: {'name': 'Pegram', 'sample': 100,'dots': 'dotplot_alpha_6_beta_14_n_100', 'prior': 'alpha_6_beta_14', 'current': 'alpha_6_beta_14_points_2', 'score': 2, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  34: {'name': 'Miller', 'sample': 20, 'dots': 'dotplot_alpha_6_beta_14_n_20','prior': 'alpha_6_beta_14', 'current': 'alpha_6_beta_14_points_3', 'score': 3, 'outcome': 'FAILURE','attribute': 'blame', 'affect': 'negative'},
+    		  35: {'name': 'Nadiak', 'sample': 20,'dots': 'dotplot_alpha_2.5_beta_2.5_n_20', 'prior': 'alpha_2.5_beta_2.5', 'current': 'alpha_2.5_beta_2.5_points_4', 'score': 4, 'outcome': 'FAILURE', 'attribute': 'blame', 'affect': 'negative'},
+    		  36: {'name': 'Petrelli', 'sample': 100, 'dots': 'dotplot_alpha_2.5_beta_2.5_n_100','prior': 'alpha_2.5_beta_2.5', 'current': 'alpha_2.5_beta_2.5_points_6', 'score': 6, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  37: {'name': 'Edmisson', 'sample': 20,'dots': 'dotplot_alpha_10_beta_10_n_20', 'prior': 'alpha_10_beta_10', 'current': 'alpha_10_beta_10_points_5', 'score': 5, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  38: {'name': 'Morris', 'sample': 100, 'dots': 'dotplot_alpha_10_beta_10_n_100','prior': 'alpha_10_beta_10', 'current': 'alpha_10_beta_10_points_7', 'score': 7, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  39: {'name': 'Shannon', 'sample': 100,'dots': 'dotplot_alpha_3.5_beta_1.5_n_100', 'prior': 'alpha_3.5_beta_1.5', 'current': 'alpha_3.5_beta_1.5_points_6', 'score': 6, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  40: {'name': 'Lewis', 'sample': 20, 'dots': 'dotplot_alpha_3.5_beta_1.5_n_20','prior': 'alpha_3.5_beta_1.5', 'current': 'alpha_3.5_beta_1.5_points_8', 'score': 8, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'},
+    		  41: {'name': 'Sisson', 'sample': 100,'dots': 'dotplot_alpha_14_beta_6_n_100', 'prior': 'alpha_14_beta_6', 'current': 'alpha_14_beta_6_points_9', 'score': 9, 'outcome': 'SUCCESS', 'attribute': 'credit', 'affect': 'positive'},
+    		  42: {'name': 'McCallum', 'sample': 20, 'dots': 'dotplot_alpha_14_beta_6_n_20','prior': 'alpha_14_beta_6', 'current': 'alpha_14_beta_6_points_10', 'score': 10, 'outcome': 'SUCCESS','attribute': 'credit', 'affect': 'positive'}
+    		  }
 
 
 class Subsession(BaseSubsession):
@@ -56,7 +96,7 @@ class Subsession(BaseSubsession):
 			for p in self.get_players():
 				# copy in the stimuli keys and shuffle them
 				people = Constants.people.copy()
-				people_sequence = [1,2,3]
+				people_sequence = list(range(1, 43))
 				print(people_sequence)
 
 				random.shuffle(people_sequence)
@@ -106,6 +146,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+	treatment = models.CharField()
 	comprehension1 = models.IntegerField(
         choices=[[1, '5 points'],[2, '7 points'], [3, '4 points']],
         widget=widgets.RadioSelect

@@ -121,12 +121,12 @@ mturk_hit_settings = {
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
     'expiration_hours': 1*24, # 1 day
-    # flags workers once they've completed the task (currently set to headwind-tailwind)
-    'grant_qualification_id': '3X9X2XMJQ4N5FSVZQJYM8O7IHI0QLB',
+    # flags workers once they've completed the task (currently set to responsibility expectations)
+    'grant_qualification_id': '3U4RTBK6TCJR6ZG8XM0M3T5YE3KU20',
     'qualification_requirements': [
-        # prevents workers from completing headwind-tailwind again after receiving flag
+        # prevents workers from completing responsibility expectations again after receiving flag
         {
-            'QualificationTypeId': "3X9X2XMJQ4N5FSVZQJYM8O7IHI0QLB",
+            'QualificationTypeId': "3U4RTBK6TCJR6ZG8XM0M3T5YE3KU20",
             'Comparator': "DoesNotExist",
         },
         # requires workers be located in the US
@@ -158,7 +158,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.001,
-    'participation_fee': 2.00,
+    'participation_fee': 3.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -189,12 +189,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 2,
         'app_sequence': ['trust', 'payment_info'],
     },
-    # {
-    #     'name': 'consent',
-    #     'display_name': "Consent Form",
-    #     'num_demo_participants': 1,
-    #     'app_sequence': ['consent'],
-    # },
+    {
+        'name': 'consent',
+        'display_name': "Consent Form",
+        'num_demo_participants': 1,
+        'app_sequence': ['consent'],
+    },
     {
         'name': 'guess_two_thirds',
         'display_name': "Guess 2/3 of the Average",
