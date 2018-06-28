@@ -1,0 +1,91 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+<style>
+    .myclass::-webkit-slider-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px !important;
+        width: 20px !important;
+        border-radius: 3px !important;
+        background: #ffffff !important;
+        cursor: pointer !important !important;
+        -webkit-appearance: none !important;
+        margin-top: -14px !important;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        margin: 18px 0;
+        width: 100%;
+    }
+
+    input[type=range]:focus {
+        outline: none;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #ffffff;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        border: 0px;
+        height: 0px;
+        width: 0px;
+        border-radius: 0px;
+        -webkit-appearance: none;
+    }
+
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('input[type=range]').on('input change', function () {
+            $('input[type=range]').addClass('myclass');
+        });
+
+    });
+</script>
+
+{% endblock %}
+
+{% block title %}
+    <h4>Gymnast {{ subsession.round_number }}/{{ Constants.num_rounds }}: {{player.stim_name}}</h4>
+{% endblock %}
+
+{% block content %}
+
+	<p>
+        Here is an individual competitor in this gymnastics competition.  <strong>The results of all
+        <u>{{player.stim_sample}}</u> of {{player.stim_name}}'s past performances </strong>were used to create the images below. 
+    </p>
+    <p>
+        In this first figure, each dot represents one of {{player.stim_name}}'s <b>{{player.stim_sample}} past performances</b>.  
+        Each dot is placed above the score {{player.stim_name}} received for that particular performance.
+    </p>
+    
+    <div style="float:none; width: 500px; margin: 0 auto; height: 350px;">
+        <p style="text-align:center;"><strong><big>{{player.stim_name}}'s {{ player.stim_sample }} past performances</big></strong></p>
+        <img style="height:300px" img src="{% static dots %}"/><br><br>
+        <p style="text-align:center;"><strong><big></big></strong></p>
+    </div><br>
+
+    <p style="text-align:center;"><strong>Do you think {{ player.stim_name }} will score <u>at least 5 points</u> and advance in today's competition?</strong><br>(Click on the slider bar to make the selector button appear.)</p>
+            
+    <div style="float:center; width: 643px; margin: 0 auto; padding: 5px">
+        <p style="float:left; padding: 5px;"><strong>Definitely NO</strong><p style="float:right; padding: 5px;"><strong>Definitely YES</strong></p>
+        <p style="float:none; width: 600px;">{% formfield player.prediction with label="" %}</p>
+    </div>
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}

@@ -243,6 +243,26 @@ SESSION_CONFIGS = [
         'app_sequence': ['headwind_tailwind'],
     },
     {
+        'name': 'whatsnext',
+        'display_name': 'Whats Next',
+        'num_demo_participants': 1,
+        'app_sequence': ['whatsnext'],
+    },
+    {
+        'name': 'whatsnext_coins',
+        'treatment': 'coins',
+        'display_name': 'Whats Next Coins',
+        'num_demo_participants': 1,
+        'app_sequence': ['whatsnext'],
+    },
+    {
+        'name': 'whatsnext_analyst',
+        'treatment': 'analyst',
+        'display_name': 'Whats Next Analyst',
+        'num_demo_participants': 1,
+        'app_sequence': ['whatsnext'],
+    },
+    {
         'name': 'snowy_pictures',
         'display_name': "Snowy Pictures",
         'num_demo_participants': 1,

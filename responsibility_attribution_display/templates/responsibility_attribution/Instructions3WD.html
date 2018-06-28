@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block content %}
+
+    <div class="instructions well well-lg">
+
+    <h4 class="panel-sub-heading">Instructions 3/3</h4>
+        <br>
+        <p><b>Prediction phase:</b> Based on each gymnast's past performances, you will be asked to predict how likely it is that s/he will earn a score of <b>at least 5 points</b>, and advance to the next stage of the competition.  After you make your prediction, we will show you the score the gymnast actually earned by marking it on the heat map with a black dot.</p>
+
+        <p>Here is an example of how we'd show you scores received by the two gymnasts from before, Smith and Jarrod.</p>
+
+        <div style="float:none; width: 850px; margin: 0 auto; height: 175px;">
+            <!-- LEFT BOX -->
+            <div style="width:350px;height:130px; float:left; padding:10px; margin:16px">
+            <p style="text-align:center;"><strong>Smith's score today: 9 points</strong></p>
+            </div>
+            <!-- RIGHT BOX -->
+            <div style="width:350px;height:130px; float:left; padding:10px; margin:16px">
+            <p style="text-align:center;"><strong>Jarrod's score today: 3 points</strong></p>
+            </div>
+        </div>
+
+        We can see that Smith scored 9 points today, so Smith gets to move on to the next round of today's competition, because a score of 9 surpasses the 5 point threshold for success.  We can also see that Jarrod scored 3 points today, so Jarrod will not get to move on to the next round, because a score of 3 misses the threshold of 5 points.
+        <hr>
+
+        <p><b>Responsibility phase:</b> Depending on the outcome, you will be asked to indicate how much credit a successful gymnast deserves, or how much blame an unsuccessful gymnast deserves, for his or her performance today.
+
+        <p>Overall, you will see the past performance history, and today's competition outcomes, for 42 gymnasts. For each gymnast you will first make a prediction about his or her performance in today's competition, and then assign responsibility for the outcome after the score they received today is revealed.</p>
+    
+
+        <p>After you've seen all 42 outcomes, we'll ask you a few very short follow up questions, and that will conclude the HIT.</p>
+
+        
+    </div>
+
+</div>
+
+
+
+    {% next_button %}
+
+{% endblock %}
