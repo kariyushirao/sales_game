@@ -31,6 +31,11 @@ class Player(BasePlayer):
         choices=[[0, 'Male'],[1, 'Female']],
         widget=widgets.RadioSelect
         )
-    prediction = models.TextField()
     responsibility = models.TextField()
+    most_important = models.CharField(
+        choices=['Average Score in Past Tournaments',
+                 'Number of Tournaments Completed',
+                 'Score in the Tournament Today'],
+        widget=widgets.RadioSelect
+        )
     comments = models.TextField()

@@ -1,0 +1,115 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+<style>
+    .myclass::-webkit-slider-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px !important;
+        width: 20px !important;
+        border-radius: 3px !important;
+        background: #ffffff !important;
+        cursor: pointer !important !important;
+        -webkit-appearance: none !important;
+        margin-top: -14px !important;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        margin: 18px 0;
+        width: 100%;
+    }
+
+    input[type=range]:focus {
+        outline: none;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #ffffff;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        border: 0px;
+        height: 0px;
+        width: 0px;
+        border-radius: 0px;
+        -webkit-appearance: none;
+    }
+
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('input[type=range]').on('input change', function () {
+            $('input[type=range]').addClass('myclass');
+        });
+
+    });
+</script>
+
+{% endblock %}
+
+{% block title %}
+    Pair {{ subsession.round_number }}/{{ Constants.num_rounds }}: {{name1}} and {{name2}}
+{% endblock %}
+
+{% block content %}
+
+	<p>
+    Here are the results for <b>{{name1}}</b> and <b>{{name2}}</b>. First, you can see the histograms that describe 
+    <strong>{{name1}}'s scores in <u>{{sample1}}</u> past performances</strong>, and <strong>{{name2}}'s scores in
+    <u>{{sample2}}</u> past performances</strong>.  
+    </p><br>
+
+    <div style="float:none; width: 900px; height: 350px">
+        <!-- LEFT BOX -->
+        <div style="width:450px;height:300px; float:left">
+            <p style="text-align:center;"><strong><big>{{name1}}'s past {{sample1}} performances</big></strong></p>
+            <img style="height:270px; align: left; padding-left: 22px" img src="{% static dots1 %}"/>
+        </div>
+        <!-- RIGHT BOX -->
+        <div style="width:450px;height:300px; float:right">
+            <p style="text-align:center;"><strong><big>{{name2}}'s past {{sample2}} performances</big></strong></p>
+            <img style="height:270px; align: left; padding-left: 22px" img src="{% static dots2 %}"/>
+        </div>
+    </div>
+
+    <br><p>
+    <strong>Here we have marked the outcome of today's competition</strong> on {{name1}} and {{name2}}'s heat maps.  
+    </p><br>
+
+    <div style="float:none; width: 900px; height: 200px;">
+        <!-- LEFT BOX -->
+        <div style="width:450px;height:150px; float:left">
+            <p style="text-align:center;"><strong><big>{{name1}}'s score today: {{score1}} points</big></strong></p>
+            <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map1 %}"/>
+        </div>
+        <!-- RIGHT BOX -->
+        <div style="width:450px;height:150px; float:right">
+            <p style="text-align:center;"><strong><big>{{name2}}'s score today: {{score2}} points</big></strong></p>
+            <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map2 %}"/>
+        </div>
+    </div>
+
+    <p style="text-align:center;"><strong>Which gymnast deserves <u>more</u> credit or blame <u>for today's performance</u>, 
+    {{name1}} or {{name2}}?</strong>
+        <br>(Click on the slider bar to make the selector button appear.)</p>
+            
+    <div style="float:center; width: 600px; margin: auto; padding: 1px">
+        <p style="float:left; padding: 15px;"><strong>{{name1}}</strong></p>
+        <p style="float:right; padding: 15px;"><strong>{{name2}}</strong></p>
+        {% formfield player.attribution with label="" %}
+    </div>
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}

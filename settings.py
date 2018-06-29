@@ -312,6 +312,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['responsibility_attribution','demographics'],
     },
+    {   
+        'name': 'responsibility_attribution_compare',
+        'display_name': "Responsibility Attribution Compare",
+        'num_demo_participants': 1,
+        'app_sequence': ['responsibility_attribution_compare','demographics'],
+    },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
