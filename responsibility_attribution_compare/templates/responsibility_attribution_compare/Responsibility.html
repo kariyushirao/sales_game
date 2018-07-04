@@ -89,23 +89,22 @@
     <div style="float:none; width: 900px; height: 200px;">
         <!-- LEFT BOX -->
         <div style="width:450px;height:150px; float:left">
-            <p style="text-align:center;"><strong><big>{{name1}}'s score today: {{score1}} points</big></strong></p>
+            <p style="text-align:center;"><strong><big>{{name1}}'s score today: {{score1}} points [{{outcome}}]</big></strong></p>
             <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map1 %}"/>
         </div>
         <!-- RIGHT BOX -->
         <div style="width:450px;height:150px; float:right">
-            <p style="text-align:center;"><strong><big>{{name2}}'s score today: {{score2}} points</big></strong></p>
+            <p style="text-align:center;"><strong><big>{{name2}}'s score today: {{score2}} points [{{outcome}}]</big></strong></p>
             <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map2 %}"/>
         </div>
     </div>
 
-    <p style="text-align:center;"><strong>Which gymnast deserves <u>more</u> credit or blame <u>for today's performance</u>, 
-    {{name1}} or {{name2}}?</strong>
+    <p style="text-align:center;"><strong>Who deserves more <u>{{attribute}}</u> for their performance today, {{name1}} or {{name2}}?</strong>
         <br>(Click on the slider bar to make the selector button appear.)</p>
-            
-    <div style="float:center; width: 600px; margin: auto; padding: 1px">
-        <p style="float:left; padding: 15px;"><strong>{{name1}}</strong></p>
-        <p style="float:right; padding: 15px;"><strong>{{name2}}</strong></p>
+
+    <div style="float:center; width: 800px; margin: 0 auto; padding: 5px">
+        <p style="float:left;"><strong>Definitely {{name1}} &emsp;&emsp;&emsp;&nbsp;</strong></p>
+        <p style="float:right;"><strong>Definitely {{name2}}</strong></p>
         {% formfield player.attribution with label="" %}
     </div>
 

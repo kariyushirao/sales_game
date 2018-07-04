@@ -21,14 +21,17 @@ class Constants(BaseConstants):
     num_rounds = 3
 
     # stimuli
-    pairs = {1: {'gymnast1': {'name': 'Page', 'sample': 20,'dots': 'dotplot_alpha_3_beta_7_n_20', 'current': 'alpha_3_beta_7_points_2', 'score': 2},
-    			 'gymnast2': {'name': 'Walker', 'sample': 20,'dots': 'dotplot_alpha_7_beta_3_n_20', 'current': 'alpha_7_beta_3_points_2', 'score': 2}
+    pairs = {1: {'gymnast1': {'name': 'Page', 'sample': 20,'dots': 'dotplot_alpha_3_beta_7_n_20', 'current': 'alpha_3_beta_7_points_1', 'score': 1},
+    			 'gymnast2': {'name': 'Walker', 'sample': 20,'dots': 'dotplot_alpha_7_beta_3_n_20', 'current': 'alpha_7_beta_3_points_1', 'score': 1},
+    			 'outcome': 'FAILURE', 'attribute': 'blame'
     			},
-    		 2: {'gymnast1': {'name': 'Nelson', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_5', 'score': 5},
-    			 'gymnast2': {'name': 'Samuels', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_8', 'score': 8}
+    		 2: {'gymnast1': {'name': 'Nelson', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_7', 'score': 7},
+    			 'gymnast2': {'name': 'Samuels', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_9', 'score': 9},
+    			 'outcome': 'SUCCESS', 'attribute': 'credit'
     			},
-    		 3: {'gymnast1': {'name': 'Williams', 'sample': 20,'dots': 'dotplot_alpha_5_beta_5_n_20', 'current': 'alpha_6_beta_6_points_5', 'score': 5},
-    			 'gymnast2': {'name': 'Guerrieri', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_5', 'score': 5}
+    		 3: {'gymnast1': {'name': 'Williams', 'sample': 20,'dots': 'dotplot_alpha_5_beta_5_n_20', 'current': 'alpha_6_beta_6_points_3', 'score': 3},
+    			 'gymnast2': {'name': 'Guerrieri', 'sample': 100,'dots': 'dotplot_alpha_5_beta_5_n_100', 'current': 'alpha_6_beta_6_points_3', 'score': 3},
+    			 'outcome': 'FAILURE', 'attribute': 'blame'
     			}
     		  }
 
@@ -60,7 +63,14 @@ class Subsession(BaseSubsession):
 				
 				# record stim attributes
 				pair_id = pairs_list[image_index]
+				print(pair_id)
 				p.pair_id = pair_id
+				p.pair_outcome = pairs[pair_id]['outcome']
+				print(pairs[pair_id]['outcome'])
+				print(p.pair_outcome)
+				p.pair_attribute = pairs[pair_id]['attribute']
+				print(pairs[pair_id]['attribute'])
+				print(p.pair_attribute)
 				print(pair_id)
 				if order == 1:
 					p.stim_name1 = pairs[pair_id]['gymnast1']['name']
@@ -97,6 +107,8 @@ class Subsession(BaseSubsession):
 				# record stim attributes
 				pair_id = pairs_list[image_index]
 				p.pair_id = pair_id
+				p.pair_outcome = pairs[pair_id]['outcome']
+				p.pair_attribute = pairs[pair_id]['attribute']
 				if order == 1:
 					p.stim_name1 = pairs[pair_id]['gymnast1']['name']
 					p.stim_sample1 = pairs[pair_id]['gymnast1']['sample']
@@ -129,23 +141,30 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 	comprehension1 = models.IntegerField(
+        choices=[[1, '5 points'],[2, '7 points'], [3, '4 points']],
+        widget=widgets.RadioSelect
+        )
+	comprehension2 = models.IntegerField(
         choices=[[1, 'Marking the score with a light gray color'],
         		[2, 'Marking the score with a black dot'], 
         		[3, 'Marking the score with a dark red color']],
         widget=widgets.RadioSelect
         )
-	comprehension2 = models.IntegerField(
+	comprehension3 = models.IntegerField(
         choices=[[1, 'Each dot represents one of the points the gymnast earned today'],
         		[2, 'Each dot represents a score the gymnast earned in a past competition'], 
         		[3, 'Each dot represents a special move performed by the gymnast']],
         widget=widgets.RadioSelect
         )
-	comprehension3 = models.IntegerField(
+	comprehension4 = models.IntegerField(
         choices=[[1, '5 points'],[2, '7 points'], [3, '2 points']],
         widget=widgets.RadioSelect
         )
 
 	pair_id = models.IntegerField()
+	pair_outcome = models.CharField()
+	pair_attribute = models.CharField()
+	stim_name1 = models.CharField()
 	stim_name1 = models.CharField()
 	stim_name2 = models.CharField()
 	stim_sample1 = models.IntegerField()

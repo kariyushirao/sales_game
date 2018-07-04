@@ -42,7 +42,7 @@ class Comprehension(Page):
         return self.round_number == 1
 
     form_model = models.Player
-    form_fields = ['comprehension1', 'comprehension2', 'comprehension3']
+    form_fields = ['comprehension1', 'comprehension2', 'comprehension3', 'comprehension4']
 
     def vars_for_template(self):
         return {
@@ -51,10 +51,11 @@ class Comprehension(Page):
 
     def error_message(self, values):
         print('values are', values)
-        color = (values['comprehension1'] == 3)
-        dots = (values['comprehension2'] == 2)
-        score = (values['comprehension3'] == 2)
-        if not (color and dots and score):
+        threshold = (values['comprehension1'] == 1)
+        color = (values['comprehension2'] == 3)
+        dots = (values['comprehension3'] == 2)
+        score = (values['comprehension4'] == 2)
+        if not (threshold and color and dots and score):
             return 'It looks like you may have answered one or more questions incorrectly.  Please check your answers and correct any mistakes.'
 
 class Responsibility(Page):
@@ -73,6 +74,8 @@ class Responsibility(Page):
             'sample2': self.player.stim_sample2,
             'score1': self.player.stim_score1,
             'score2': self.player.stim_score2,
+            'outcome': self.player.pair_outcome,
+            'attribute': self.player.pair_attribute
         }
 
 class Results(Page):
