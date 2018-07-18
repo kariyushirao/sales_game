@@ -64,38 +64,21 @@
 {% block content %}
 
 	<p>
-    Here are the results for <b>{{name1}}</b> and <b>{{name2}}</b>. First, you can see the histograms that describe 
-    <strong>{{name1}}'s scores in <u>{{sample1}}</u> past performances</strong>, and <strong>{{name2}}'s scores in
-    <u>{{sample2}}</u> past performances</strong>.  
+    Here are the results for <b>{{name1}}</b> and <b>{{name2}}</b>. You can see the histograms describe <strong>{{name1}}'s scores for 
+    <u>{{sample1}}</u> past performances</strong>, and <strong>{{name2}}'s scores for <u>{{sample2}}</u> past performances</strong>.
+    {{name1}}'s and {{name2}}'s scores in today's competition are marked in <span style="color:red"><b>RED</b></span>.
     </p><br>
 
     <div style="float:none; width: 900px; height: 350px">
         <!-- LEFT BOX -->
         <div style="width:450px;height:300px; float:left">
-            <p style="text-align:center;"><strong><big>{{name1}}'s past {{sample1}} performances</big></strong></p>
-            <img style="height:270px; align: left; padding-left: 22px" img src="{% static dots1 %}"/>
+            <p style="text-align:center;"><strong><big>{{name1}}'s score today: {{score1}} points [{{outcome}}]</big></strong></p>
+            <img style="height:270px; align: left; padding-left: 22px" img src="{% static current1 %}"/>
         </div>
         <!-- RIGHT BOX -->
         <div style="width:450px;height:300px; float:right">
-            <p style="text-align:center;"><strong><big>{{name2}}'s past {{sample2}} performances</big></strong></p>
-            <img style="height:270px; align: left; padding-left: 22px" img src="{% static dots2 %}"/>
-        </div>
-    </div>
-
-    <br><p>
-    <strong>Here we have marked the outcome of today's competition</strong> on {{name1}} and {{name2}}'s heat maps.  
-    </p><br>
-
-    <div style="float:none; width: 900px; height: 200px;">
-        <!-- LEFT BOX -->
-        <div style="width:450px;height:150px; float:left">
-            <p style="text-align:center;"><strong><big>{{name1}}'s score today: {{score1}} points [{{outcome}}]</big></strong></p>
-            <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map1 %}"/>
-        </div>
-        <!-- RIGHT BOX -->
-        <div style="width:450px;height:150px; float:right">
             <p style="text-align:center;"><strong><big>{{name2}}'s score today: {{score2}} points [{{outcome}}]</big></strong></p>
-            <img style="height: 95px; width:450px; align: left; padding-right: 5px" img src="{% static heat_map2 %}"/>
+            <img style="height:270px; align: left; padding-left: 22px" img src="{% static current2 %}"/>
         </div>
     </div>
 
@@ -109,6 +92,9 @@
     </div>
 
     <br><br>
-    {% next_button %}
+
+    <div style="text-align:center;">
+        <button class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
+    </div>
 
 {% endblock %}

@@ -21,10 +21,8 @@ class Instructions2(Page):
             # these file names refer to specific items in the ../templates/responsibility_attribution
             # folder - make sure you have images in that folder that match these file names, or 
             # change the file names to reflect which images you wish to use
-            'dots1': 'responsibility_attribution/pictures/Smith_dots.png',
-            'dots2': 'responsibility_attribution/pictures/Jarrod_dots.png',
-            'heat1': 'responsibility_attribution/pictures/Smith_prior.png',
-            'heat2': 'responsibility_attribution/pictures/Jarrod_prior.png'
+            'dots1': 'responsibility_attribution_compare/pictures/Smith_dots.png',
+            'dots2': 'responsibility_attribution_compare/pictures/Jarrod_dots.png'
         }
 
 class Instructions3(Page):
@@ -33,8 +31,8 @@ class Instructions3(Page):
 
     def vars_for_template(self):
         return {
-            'curr1': 'responsibility_attribution/pictures/Smith_current.png',
-            'curr2': 'responsibility_attribution/pictures/Jarrod_current.png'
+            'curr1': 'responsibility_attribution_compare/pictures/Smith_current.png',
+            'curr2': 'responsibility_attribution_compare/pictures/Jarrod_current.png'
         }
 
 class Comprehension(Page):
@@ -42,20 +40,19 @@ class Comprehension(Page):
         return self.round_number == 1
 
     form_model = models.Player
-    form_fields = ['comprehension1', 'comprehension2', 'comprehension3', 'comprehension4']
+    form_fields = ['comprehension1', 'comprehension3', 'comprehension4']
 
     def vars_for_template(self):
         return {
-            'curr': 'responsibility_attribution/pictures/Nussbaum_current.png'
+            'curr': 'responsibility_attribution_compare/pictures/Nussbaum_current.png'
         }
 
     def error_message(self, values):
         print('values are', values)
         threshold = (values['comprehension1'] == 1)
-        color = (values['comprehension2'] == 3)
         dots = (values['comprehension3'] == 2)
         score = (values['comprehension4'] == 2)
-        if not (threshold and color and dots and score):
+        if not (threshold and dots and score):
             return 'It looks like you may have answered one or more questions incorrectly.  Please check your answers and correct any mistakes.'
 
 class Responsibility(Page):
@@ -64,10 +61,8 @@ class Responsibility(Page):
 
     def vars_for_template(self):
         return {
-            'dots1': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_dots1),
-            'dots2': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_dots2),
-            'heat_map1': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_current1),
-            'heat_map2': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_current2),
+            'current1': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_current1),
+            'current2': 'responsibility_attribution_compare/pictures/{}.png'.format(self.player.stim_current2),
             'name1': self.player.stim_name1,
             'name2': self.player.stim_name2,
             'sample1': self.player.stim_sample1,
@@ -80,7 +75,7 @@ class Responsibility(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number >= 3
+        return self.round_number >= 48
 
 
 page_sequence = [
