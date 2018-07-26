@@ -114,9 +114,9 @@ ROOMS = [
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
 mturk_hit_settings = {
-    'keywords': ['easy', 'brief', 'choice', 'prediction', 'study', 'short', 'experiment'],
-    'title': 'Quick game with short survey',
-    'description': 'A quick experiment about making predictions in games. Less than 15 minutes to complete.',
+    'keywords': ['easy', 'brief', 'judgment', 'experiment', 'study', 'short', 'academic'],
+    'title': '10-minute experiment about responbibility judgments',
+    'description': 'A quick experiment about responsibility judgments. Less than 15 minutes to complete.',
     'frame_height': 500,
     'preview_template': 'global/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
@@ -158,7 +158,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.001,
-    'participation_fee': 3.00,
+    'participation_fee': 2.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }

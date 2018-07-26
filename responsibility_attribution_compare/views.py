@@ -70,7 +70,10 @@ class Responsibility(Page):
             'score1': self.player.stim_score1,
             'score2': self.player.stim_score2,
             'outcome': self.player.pair_outcome,
-            'attribute': self.player.pair_attribute
+            'attribute': self.player.pair_attribute,
+            'color': self.player.color,
+            'succfail': self.player.succfail,
+            'didnot': self.player.didnot
         }
 
 class Results(Page):
