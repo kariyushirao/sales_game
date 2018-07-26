@@ -246,6 +246,7 @@ class Subsession(BaseSubsession):
 				p.succfail = pairs[pair_id]['succfail']
 				p.didnot = pairs[pair_id]['didnot']              
 				if order == 1:
+					p.order = 1
 					p.stim_name1 = pairs[pair_id]['gymnast1']['name']
 					p.stim_sample1 = pairs[pair_id]['gymnast1']['sample']
 					p.stim_current1 = pairs[pair_id]['gymnast1']['current']
@@ -256,6 +257,7 @@ class Subsession(BaseSubsession):
 					p.stim_current2 = pairs[pair_id]['gymnast2']['current']
 					p.stim_score2 = pairs[pair_id]['gymnast2']['score']
 				else:
+					p.order = 2
 					p.stim_name1 = pairs[pair_id]['gymnast2']['name']
 					p.stim_sample1 = pairs[pair_id]['gymnast2']['sample']
 					p.stim_current1 = pairs[pair_id]['gymnast2']['current']
@@ -285,6 +287,7 @@ class Subsession(BaseSubsession):
 				p.succfail = pairs[pair_id]['succfail']
 				p.didnot = pairs[pair_id]['didnot'] 				
 				if order == 1:
+					p.order = 1
 					p.stim_name1 = pairs[pair_id]['gymnast1']['name']
 					p.stim_sample1 = pairs[pair_id]['gymnast1']['sample']
 					p.stim_current1 = pairs[pair_id]['gymnast1']['current']
@@ -295,6 +298,7 @@ class Subsession(BaseSubsession):
 					p.stim_current2 = pairs[pair_id]['gymnast2']['current']
 					p.stim_score2 = pairs[pair_id]['gymnast2']['score']
 				else:
+					p.order = 2
 					p.stim_name1 = pairs[pair_id]['gymnast2']['name']
 					p.stim_sample1 = pairs[pair_id]['gymnast2']['sample']
 					p.stim_current1 = pairs[pair_id]['gymnast2']['current']
