@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1.67em;
+		margin-bottom: 1.67em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	Solo Player
+{% endblock %}
+
+{% block content %}
+	<p>
+		<big><b>You will be playing solo.</b></big>
+	</p>
+
+	<p>
+		We were not able to find a group for you to play with.  But, you can still complete 
+		this HIT as a solo player.  You will receive the same compensation as you would if you 
+		played with a group (same participation fee and same bonus opportunities).
+	</p>
+	<p>
+		<b>WARNING: ALWAYS SUBMIT YOUR RESPONSES BEFORE TIME EXPIRES, OTHERWISE YOU WILL BE MARKED AS A DROPOUT
+		AND YOU WILL NOT RECEIVE THE $4.00 ACTIVE PARTICIPATION BONUS.</b>
+	</p>
+	<p>
+		Even though you are playing solo, we have to make sure the standards we apply are the same for all 
+		participants, so you will still be subject to the dropout rule.
+	</p>
+	<p>
+		Click Next to proceed to the solo player version of this game.
+	</p>
+	<br>
+
+{% next_button %}
+
+{% endblock %}
+

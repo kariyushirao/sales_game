@@ -1,0 +1,31 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree %}
+
+{% block scripts %}
+<style>
+.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+The Sales Game
+{% endblock %}
+
+{% block content %}
+
+    <h5>Finding players for your group.</h5>
+    <p>
+    	The maximum amount of time it will take to form your group is 10 minutes. Please stay
+   		active on this page, otherwise the game may skip you during group formation. 
+	</p>
+   	<p><i>(If it seems like this page has gotten stuck, try manually refreshing.)</i></p>
+
+{% endblock %}

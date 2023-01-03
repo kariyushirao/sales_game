@@ -1,0 +1,217 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.myClass::-webkit-slider-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 2px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-webkit-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassFF::-moz-range-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-moz-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassMS::-ms-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		margin-top: -8px !important;
+	}
+
+	input[type=range] {
+		-webkit-appearance: none;
+		margin: 10px 0;
+		height: 8px;
+		width: 100%;
+		border: 1px solid white;
+	}
+	input[type=range]:focus {
+		outline: none;
+	}
+	input[type=range]::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background: #64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-webkit-slider-thumb {
+		border: 0px;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-webkit-appearance: none;
+	}
+	input[type=range]::-moz-range-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background:#64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-moz-range-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-moz-appearance: none;
+	}
+	input[type=range]::-moz-focus-outer {
+    	border: 0;
+    	outline: none;
+    }
+	input[type=range]::-ms-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		background:transparent;
+		border-color:transparent;
+		border-width: 16px 0;
+		color: transparent;
+	}
+	input[type=range]::-ms-fill-lower {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-lower {
+    	background: #64bbf5;
+    }
+    input[type=range]::-ms-fill-upper {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-upper {
+    	background: #64bbf5;
+    }
+	input[type=range]::-ms-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+	}
+</style>
+<script>
+	$(document).ready(function () {
+		$('input[name=confidence]').on('input change', function () {
+			$('input[name=confidence]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+			$('#id_checkslider_confidence').val(1);
+		});
+
+	});
+
+	// grab dictionary of estimates passed to DOM from views
+	var estimates = {{ estimates|json }};
+
+	function makeUL(list) {
+		var list = document.createElement('ul');
+
+		for(var i = 0; i < estimates.length; i++) {
+			var item = document.createElement('li');
+			num = i + 1
+			item.appendChild(document.createTextNode(num + ": " + estimates[i][0] + ",    " + estimates[i][1] + " points"));
+			list.appendChild(item);
+		}
+		return list;
+	}
+
+	document.getElementById('id_estimates').appendChild(makeUL(estimates));
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }} Check-In
+{% endblock %}
+
+{% block content %}
+
+	<input type="hidden" name="checkslider_confidence" value="" id="id_checkslider_confidence"/>
+	{{ form.checkslider_confidence.errors }}
+
+	{% if is_dropout == True %}
+		<span style="color:crimson;"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+	{% else %}
+		<br>
+	{% endif %}
+
+	<p><big><b>How accurate are your estimates?</b></big></p>
+	<p>
+		We have used your estimates on the last page to rank the platforms in order from highest to
+		lowest average value.  The resulting rank-ordered list of platforms can be found below.
+	</p>
+	<p>	
+		<b>Focus on the platforms for which you entered valid estimates</b>.  
+		<b>How accurate is your ranking of {{ company_name }}'s platforms?</b>
+	</p>
+
+	<div style="float:center; width: 780px; margin: 0 auto; padding: 5px">
+		<p style="float:left"><strong>(Totally Wrong) 0%&emsp;&emsp;</strong></p>
+		<p style="float:right"><strong>100% (Totally Right)</strong></p>
+			{% formfield player.confidence with label="" %}
+	</div>
+	
+	<p>
+		<i>If you ran out of time, empty estimates were recorded as zeros. You can ignore these 
+			zero-estimates (these will appear at the bottom of the list).</i>
+	</p>
+	
+	<b>Your Estimates</b>
+
+	<div id="id_estimates" size="20" style="width: 300px; padding: 10px;"></div>
+
+	{% next_button %}
+	
+{% endblock %}

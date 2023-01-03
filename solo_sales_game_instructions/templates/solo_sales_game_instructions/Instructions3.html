@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 3 / 6
+{% endblock %}
+
+{% block content %}
+
+<div class="instructions well well-lg">
+	<p><i>(Read these instructions carefully. There will be a comprehension check at the end.)</i></p>
+	<p>
+		Let's walk through a quick example.  <b>In this example, you will work for Company F</b>.  
+		Company F's 20 platforms are all named after different types of fruit. <b>Below are the names 
+		of Company F's platforms</b>.
+	</p>
+	<table>
+		<tr>
+			<td><ul><li>Apple</li><li>Apricot</li><li>Banana</li><li>Blueberry</li></ul></td>
+			<td><ul><li>Cherry</li><li>Coconut</li><li>Fig</li><li>Grape</li></ul></td>
+			<td><ul><li>Kumquat</li><li>Kiwi</li><li>Lime</li><li>Lychee</li></ul></td>
+			<td><ul><li>Mango</li><li>Nectarine</li><li>Orange</li><li>Peach</li></ul></td>
+			<td><ul><li>Pear</li><li>Quince</li><li>Tamarind</li><li>Yuzu</li></ul></td>
+		</tr>
+	</table>
+	<p>Click Next to continue to the example.</p>
+</div>
+
+<br><br>
+	{% next_button %}
+	
+{% endblock %}

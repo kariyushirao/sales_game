@@ -1,0 +1,189 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }}
+{% endblock %}
+
+{% block content %}
+
+
+	<h5><table style="width:100%">
+		<tr>
+			<td>
+			{{ company_name }} : Round {{ company_round }} / {{ Constants.cnum_rounds }}
+			{% if is_dropout == True %} 
+				<span style="color:crimson"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+			{% endif %}
+			</td>
+			<td style="text-align:right;">{{company_name }} Points: <span style="color:blue;">
+				<big>{{ company_score }} ({{ company_bonus }})</big></span></td>
+		</tr>
+	</table></h5>
+
+	<br>
+	<p><big><b>Feedback from {{ company_name }}'s Customer</b></big></p>
+
+	{% if player.choose_p_timeout == True %}
+	<p>
+		Unfortunately, you did not submit a valid pitch in time.  <b>Remember you only have 60 
+		seconds to select exactly 3 platforms and submit your pitch</b>.  You received zero points
+		for this round, but don't worry, you can still earn points toward your bonus if you make
+		sure all of your pitches are submitted in under 60 seconds in the upcoming rounds.
+	</p>
+
+	{% else %}
+	<p>
+		The customer reviewed the 3 platforms you selected, and assigned a <b>Total Pitch Score</b>
+		of <b>{{ curr_score }} points</b> to your pitch.  The Total Pitch Score is the sum
+		of the points the customer assigned to each of the 3 platforms you included in your pitch. 
+		You can find the points the customer assigned to each platform below.
+	</p>
+	{% endif %}
+
+	{% if groupsize > 1 %}
+		{% if subsession.round_number in end_rounds %}
+		<p>
+			You don't have to make any sharing decisions this round, because you will be moving on to
+			a different Company for the next round.
+		</p>
+		{% else %}
+		<p>
+			Don't forget to <b>choose whether or not you want to make these results visible to the other
+			players in your group</b>.  Indicate your choice whether or not to share with each player
+			below.
+		</p>
+		{% endif %}
+	{% endif %}
+
+	<table>
+		<tr valign="top">
+			<td>
+				<table>
+					<tr valign="top">
+						<td align="left"><big><b>Your Pitch</b></big><br>
+							<b>Score: <span style="color:blue;"><big>{{ curr_score }}</big></span></b><br>
+						</td>
+					</tr>
+					<tr valign="top">
+						<td align="left"><i>Platform</i></td>
+						<td align="left"><i>Points</i></td>
+					</tr>
+					<tr valign="top">
+						<td align="left">{{ p_name_0 }}</td>
+						<td align="left">{{ p_points_0 }}</td>
+					</tr>
+					<tr valign="top">
+						<td align="left">{{ p_name_1 }}</td>
+						<td align="left">{{ p_points_1 }}</td>
+					</tr>
+					<tr valign="top">
+						<td align="left">{{ p_name_2 }}</td>
+						<td align="left">{{ p_points_2 }}</td>
+					</tr>
+				</table>
+			</td>
+			<td style="width: 125px"></td>
+	{% if subsession.round_number in end_rounds or groupsize == 1 %}
+			<td></td>
+		</tr>
+	{% else %}
+			<td>
+				<table>
+					<tr valign="left">
+						<td align="center">
+							<span style="color:blue; colspan: 3">
+								<i><b><big>&nbsp;&nbsp;&nbsp;Who do you want to share these results with?</big></b></i>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td align="left" style="width:200px">
+							<table>
+								<tr><td><b>&nbsp;&nbsp;&nbsp; Player {{ alter1_id }}</b></td></tr>
+								<tr><td>{{ form.alter1_share }}</td></tr>
+							</table>
+						</td>
+						<td align="left" style="width:200px">
+							<table>
+								<tr><td><b>&nbsp;&nbsp;&nbsp; Player {{ alter2_id }}</b></td></tr>
+								<tr><td>{{ form.alter2_share }}</td></tr>
+							</table>
+						</td>
+						{% if groupsize > 3%}
+						<td align="left" style="width:200px">
+							<table>
+								<tr><td><b>&nbsp;&nbsp;&nbsp; Player {{ alter3_id }}</b></td></tr>
+								<tr><td>{{ form.alter3_share }}</td></tr>
+							</table>
+						</td>
+						{% endif %}
+					</tr>
+				</table>
+			</td>
+		</tr>
+		{% if groupsize > 4%}
+		<tr>
+			<td></td>
+			<td></td>
+			<td>
+				<table>
+					<tr>
+						<td align="left" style="width:200px">
+							<table>
+								<tr><td><b>&nbsp;&nbsp;&nbsp; Player {{ alter4_id }}</b></td></tr>
+								<tr><td>{{ form.alter4_share }}</td></tr>
+							</table>
+						</td>
+						{% if groupsize > 5 %}
+						<td align="left" style="width:200px">
+							<table>
+								<tr><td><b>&nbsp;&nbsp;&nbsp; Player {{ alter5_id }}</b></td></tr>
+								<tr><td>{{ form.alter5_share }}</td></tr>
+							</table>
+						</td>
+						{% endif %}
+					</tr>
+				</table>
+			</td>
+		</tr>
+		{% endif %}
+	{% endif %}
+	</table>
+
+	<br>
+	
+	{% next_button %}
+	
+{% endblock %}

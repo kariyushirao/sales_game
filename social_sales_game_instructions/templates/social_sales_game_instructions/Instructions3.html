@@ -1,0 +1,76 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 3 / 6
+{% endblock %}
+
+{% block content %}
+
+<div class="instructions well well-lg">
+	<p><i>(Read these instructions carefully. There will be a comprehension check at the end.)</i></p>
+	
+	<p>
+		In the real world, companies usually employ more than one sales person, and salespeople can share
+		information about their past experience with customers to help each other decide what to pitch
+		to customers in the future.  In The Sales Game, <b>you will be matched up with between 2 and 5 other players</b>.
+		At the end of each round, <b>you and the other players in your group can choose whether or not
+		to share your results from that round with each other</b>.  
+	</p>
+	<p>
+		<b>If you and another player BOTH choose to share your results with each other, then you will 
+		BOTH be able to see each other's results</b> while you are working on your next pitch.  In other
+		words, if Player X chooses to share their results with you, and you also choose to share with 
+		Player X, then you and Player X will see each other's results. However, if <b>EITHER of you 
+		chooses NOT to share information with each other, then NEITHER of you will see each other's
+	    results</b>.  So, if Player X chooses to share their results with you, and you do not choose
+	    to share with Player X, then neither of you will see the other person's results.`
+	</p>
+	<p>
+		In each phase of the game, you and the other players in your group will all be working for
+		the <b>same company</b>, but you will each face <b>different customers</b>.  <b>If you choose to
+		share</b> your results with each other, you can <b>use the information about each other's 
+		results to learn about the average value of each platform</b>.
+	<p>
+		Let's walk through a quick example.  <b>In this example, you will work for Company F</b>.  
+		Company F's 20 platforms are all named after different types of fruit. <b>Below are the names 
+		of Company F's platforms</b>.
+	</p>
+	<table>
+		<tr>
+			<td><ul><li>Apple</li><li>Apricot</li><li>Banana</li><li>Blueberry</li></ul></td>
+			<td><ul><li>Cherry</li><li>Coconut</li><li>Fig</li><li>Grape</li></ul></td>
+			<td><ul><li>Kumquat</li><li>Kiwi</li><li>Lime</li><li>Lychee</li></ul></td>
+			<td><ul><li>Mango</li><li>Nectarine</li><li>Orange</li><li>Peach</li></ul></td>
+			<td><ul><li>Pear</li><li>Quince</li><li>Tamarind</li><li>Yuzu</li></ul></td>
+		</tr>
+	</table>
+	<p>Click Next to continue to the example.</p>
+</div>
+
+<br><br>
+	{% next_button %}
+	
+{% endblock %}

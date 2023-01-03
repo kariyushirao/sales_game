@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 5 / 6
+{% endblock %}
+
+{% block content %}
+
+	<p style="color:darkred; background-color: rgba(247, 130, 109, 0.25)">
+		<b>NOTE:</b> During the real game, <b>you will only have 60 seconds to review this feedback, 
+		and choose which players you want to share your results with next round.</b>  
+		After 60 seconds, the page will automatically advance to the next round. If you do not 
+		enter your sharing decisions before <b>time runs out</b>, your <b>missing decisions will
+		be automatically submitted as "DO NOT SHARE."</b> <b>If you repeatedly fail to submit your responses
+		before time runs out, you will be marked as a DROPOUT and you will not receive the $4.00
+		Active Participation Bonus. </b> 
+	</p>
+	<p><big><b>Feedback from Company F's Customer</b></big></p>
+	<p>
+		After you submit a pitch, we will show you how many points the customer assigned to each of the  
+		3 platforms in your pitch.  We will also show you the <b>Total Pitch Score</b>, which is <b>the  
+		sum of the points assigned to each platform</b>. Below, you can see the points, and the Total Pitch 
+		Score, that Company F's customer assigned to the pitch selected in the video you just watched.
+	</p>
+	<p>
+		You can also <b>choose whether or not you want to make these results visible</b> to each of the other 
+		players in your group while they are working on their next pitch.  Below each player's title, you
+		can click "YES, SHARE" to make your results visible to that player, or you can click "NO, DON'T SHARE"
+		if you want to keep your results hidden from that player.  <b>You will only be able to see each other's
+		results if BOTH you and the other player explicitly choose to share your results with each other</b>.
+	</p>
+	
+	<p><i>This is just a still image of what the screen might look like after you make your sharing decisions. </i></p>
+	<div style="float:none; width: 100%; margin: 0 auto; height: 250px; outline-style:solid; outline-width:1px;">
+		<img style="height:250px;" img src="{% static demo2 %}"/>
+	</div>
+
+	<br><br>
+	
+	{% next_button %}
+	
+{% endblock %}
+
+

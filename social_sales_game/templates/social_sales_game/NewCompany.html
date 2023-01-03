@@ -1,0 +1,117 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1.67em;
+		margin-bottom: 1.67em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }}
+{% endblock %}
+
+{% block content %}
+
+	{% if is_dropout == True %}
+		<span style="color:crimson;"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+	{% endif %}
+
+<div class="instructions well well-lg">
+	<p><big><b>You Have Been Hired By {{ company_name }}</b></big></p>
+	<p>
+		{% if groupsize > 1 %}
+			<b>For the next 15 rounds of The Sales Game, you and the {{ otherps }} other players in your group 
+			will work for {{ company_name }}</b>.  You will each <b>make 15 sales pitches</b> to new customers for 
+			{{ company_name }} (one pitch each round, for 15 rounds). <b>Each round, you will select a package 
+			of 3 platforms to pitch to a new customer</b>. 
+		{% else %}
+			<b>For the next 15 rounds of The Sales Game, you will work for {{ company_name }}</b>.  You will 
+			<b>make 15 sales pitches</b> to new customers for {{ company_name }} (one pitch each round, for 15 
+			rounds). <b>Each round, you will select a package of 3 platforms to pitch to a new customer</b>. 
+		{% endif %}
+
+	</p>
+	{% if subsession.round_number > 1 %}
+	<p>
+		<b><u>{{ company_name }}'s platforms are different from the platforms sold by the last company you worked
+		   for, and {{ company_name }} sells to a different type of customer.  The points {{ company_name }}'s
+		   customers assign to {{ company_name }}'s platforms might be significantly different than what you
+		   saw when you worked for the last company.
+		</u></b>
+	</p>
+	{% endif %}
+    <p>
+		<b>To maximize your bonus, you need to find the 3 highest-valued platforms</b> that {{ company_name }} 
+		offers.  <i>(Remember: Each of {{ company_name }}'s 20 platforms earns a different average point value 
+		from customers.  Customers will assign point values that might be slightly higher or lower than each 
+		platform's average point value.)</i>  
+    </p>   
+	<p>
+		<b>Below are the 20 software platforms {{ company_name }} offers</b>.  Each platform is named after a different
+	    {{ platform_types }}.
+	</p>
+
+	{% if subsession.round_number == 1 %}
+	<table>
+		<tr>
+			<td><ul><li>Canary</li><li>Cardinal</li><li>Finch</li><li>Grackle</li></ul></td>
+			<td><ul><li>Jackdaw</li><li>Lark</li><li>Longspur</li><li>Magpie</li></ul></td>
+			<td><ul><li>Martin</li><li>Munia</li><li>Oriole</li><li>Pipit</li></ul></td>
+			<td><ul><li>Robin</li><li>Sparrow</li><li>Starling</li><li>Swallow</li></ul></td>
+			<td><ul><li>Tanager</li><li>Thrush</li><li>Warbler</li><li>Wren</li></ul></td>
+		</tr>
+	</table>
+	{% elif subsession.round_number == 16 %}
+	<table>
+		<tr>
+			<td><ul><li>Ajwain</li><li>Anise</li><li>Annatto</li><li>Cardamom</li></ul></td>
+			<td><ul><li>Cinnamon</li><li>Cumin</li><li>Dill</li><li>Fennel</li></ul></td>
+			<td><ul><li>Fenugreek</li><li>Galangal</li><li>Ginger</li><li>Mahleb</li></ul></td>
+			<td><ul><li>Mustard</li><li>Nigella</li><li>Nutmeg</li><li>Paprika</li></ul></td>
+			<td><ul><li>Pepper</li><li>Saffron</li><li>Sumac</li><li>Turmeric</li></ul></td>
+		</tr>
+	</table>
+	{% else %}
+	<table>
+		<tr>
+			<td><ul><li>Argon</li><li>Bismuth</li><li>Bromine</li><li>Carbon</li></ul></td>
+			<td><ul><li>Cobalt</li><li>Copper</li><li>Gallium</li><li>Helium</li></ul></td>
+			<td><ul><li>Hydrogen</li><li>Iodine</li><li>Iron</li><li>Mercury</li></ul></td>
+			<td><ul><li>Neon</li><li>Nickel</li><li>Oxygen</li><li>Tin</li></ul></td>
+			<td><ul><li>Radon</li><li>Rhodium</li><li>Xenon</li><li>Zinc</li></ul></td>
+		</tr>
+	</table>
+	{% endif %}
+
+	<p>
+		<b>The next phase of the game will begin once you click the Next button, below</b>.  
+	</p>
+</div>
+
+<p style="color:darkred; background-color: rgba(247, 130, 109, 0.25)">
+	<b>REMEMBER: each round <u>you will only have 60 SECONDS</u> to submit your pitch, and then you will have
+	   60 seconds to review the customer feedback {% if groupsize > 1 %} and decide whether or not to share your 
+	   results with the other players in your group {% endif %}.</b> 
+</p><br>
+
+	{% next_button %}
+	
+{% endblock %}

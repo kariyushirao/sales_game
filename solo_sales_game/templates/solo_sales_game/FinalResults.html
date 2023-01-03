@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	Game Complete!
+{% endblock %}
+
+{% block content %}
+
+	<h5>Final Results</h5>
+
+<div class="instructions well well-lg">
+	{% if is_dropout == False %}
+		<p>
+			<big>Great Job! You've completed {{ Constants.cnum_rounds }} pitches for each of the 3 companies.</big>
+		</p>
+		<p>
+			We've added up all of your Total Pitch Scores to calculate your performance bonus below.
+		</p>
+			<b>Sum of Total Pitch Scores: <span style="color:blue;"><big>{{ aggregate_score }} points</b></big></span><br> 
+			<b>Performance Bonus: <span style="color:blue;"><big>{{ score_bonus }}</b></big></span>
+		</p>
+		<p>
+			You will also receive the <b><span style="color:blue;">$4.00</span> Active Participation Bonus</b> for consistently 
+			submitting your responses before the time limit.
+		</p>
+
+		<p>
+			<b>YOUR FINAL BONUS IS: <span style="color:blue;"><big>{{ total_bonus }}</b></big></span>
+		</p>
+	{% else %}
+		<p><big><b>
+			You were marked as a DROPOUT because you repeatedly failed to submit your responses before time expired.
+		</b></big></p>
+		<p>
+			Because you were marked as a DROPOUT, you will not receive the $4.00 Active Participation Bonus.
+		</p>
+		<p>
+			Here is a summary of your earnings up to the point you were marked as a dropout.
+		</p>
+		</p>
+			<b>Sum of Total Pitch Scores: <span style="color:blue;"><big>{{ aggregate_score }} points</b></big></span><br> 
+			<b>Performance Bonus:<span style="color:blue;"><big>{{ score_bonus }}</b></big></span>
+		</p>
+		<p>
+			<b>YOUR FINAL BONUS IS: <span style="color:blue;"><big>{{ total_bonus }}</b></big></span>
+		</p>
+	{% endif %}
+	<p>
+		We just have a few quick questions for you before we wrap up.  Click Next to continue. 
+	</p>
+</div><br>
+
+	{% next_button %}
+	
+{% endblock %}

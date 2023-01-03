@@ -1,0 +1,31 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree %}
+
+{% block scripts %}
+<style>
+.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+The Sales Game
+{% endblock %}
+
+{% block content %}
+
+    <h5>Waiting for the other players in your group.</h5>
+    <p>
+    	It should only take a couple minutes for the rest of your group to catch up. Please 
+    	stay active on this page, otherwise you may cause additional delays for your group.
+
+   	<p><i>(If it seems like this page has gotten stuck, try manually refreshing.)</i></p>
+
+{% endblock %}

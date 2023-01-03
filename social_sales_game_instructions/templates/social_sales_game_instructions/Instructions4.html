@@ -1,0 +1,76 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-form-errors {
+		height: 0px;
+		visibility: hidden;
+		position: fixed;
+		top: 10px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 4 / 6
+{% endblock %}
+
+{% block content %}
+
+	<p style="color:darkred; background-color: rgba(247, 130, 109, 0.25)">
+		<b>NOTE:</b> During the real game, <b>you will only have 60 seconds to submit your pitch.</b>  
+		   After 60 seconds, the page will automatically submit an empty pitch, and you will receive 
+		   a Total Pitch Score of ZERO for that round.  <b>If you repeatedly fail to submit your responses
+		   before time runs out, you will be marked as a DROPOUT and you will not receive the $4.00
+		   Active Participation Bonus. </b> Make sure you always submit your pitch in less than 60 seconds.
+	</p>
+	<p><big><b>Build your sales pitch for Company F</b></big></p>
+	<p>
+		Each round, you'll be asked to <b><u>choose 3 platforms</u></b> to include in your pitch.  
+		The video below demonstrates how this will work.  <b>To add a platform to your pitch, 
+		just click on the name of the platform in the Platform List on the left, then click the ADD 
+		button</b>.  The platform you selected will then move from the Platform List on the left to Your  
+		Pitch on the right.  
+	</p>
+	<p>
+		<b>If you change your mind</b> about a platform after adding it to your pitch, just <b>click on the 
+		name of the platform in Your Pitch on the right, then click the REMOVE button</b>.  The platform you selected 
+		will then move from Your Pitch back to the Platform List on the left.  When you are done editing your pitch, 
+		click the blue SUBMIT button at the bottom of the page.
+	</p>
+	<p>
+		<i>Video plays on a loop. Click the Next button at the very bottom of this page when you are done watching.</i>
+	</p>
+
+	<div style="float:none; width: 100%; margin: 0 auto; height: 500px; outline-style:solid; outline-width:1px;">
+		<img style="height:500px;" img src="{% static demo1 %}"/>
+	</div>
+
+	<br><br>
+
+		{% next_button %}
+
+{% endblock %}

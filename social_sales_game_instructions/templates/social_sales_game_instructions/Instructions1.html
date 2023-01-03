@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++;
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 1 / 6
+{% endblock %}
+
+{% block content %}
+
+<div class="instructions well well-lg">
+	<p><i>(Read these instructions carefully. There will be a comprehension check at the end.)</i></p>
+	<p>
+		Welcome to The Sales Game!   In this game, you will play the role of a Technical Sales Representative.  
+		<b>Your job is to sell business software platforms.  </b>These software platforms support key business 
+		processes, like recruiting new employees, managing payroll, and tracking inventory.  
+	</p>
+	<p>
+		The Sales Game has 3 phases. <b>In each phase, you will work for a different company</b> that makes and
+		sells business software platforms. <b>Each company sells 20 software platforms</b>, and each platform 
+		supports a separate business process. <b>Each company caters toward a different type of customer</b>,
+		so the software platforms each company makes are unique. In other words, the three companies don't 
+		compete against each other - each company's platforms are specialized toward a different set of 
+		customer needs.
+	</p>
+	<p>
+		<b>You will work for each company for 15 rounds, and then you will move on and work for a different 
+		company</b>.  On each round, you will make a pitch to a new customer.  You will make 15 pitches for each
+		of the three companies (45 pitches total, 45 rounds total).
+	</p>
+	<p>
+		<b>You can only include 3 of a company's 20 software platforms in each pitch</b> you make to one of their
+		customers.  To maximize your chances of making a sale, <b>you need to figure out which 3 platforms each
+		company's customers value the most</b>.
+	</p>
+	<p>
+		After you submit a pitch, <b>the customer will let you know how much they value the platforms</b> in
+		that pitch <b>by assigning points to each platform</b>.  Each company's <b>customers have similar
+		business needs</b>, so they tend to agree about which of the company's platforms are more valuable
+		than others.  For example, <b>if Platform X is the most valuable platform that a company makes, every
+		customer will assign a high point value to Platform X</b>.  The exact point value each customer assigns
+		to Platform X <b>might differ by a few points</b>, but you'll notice that, on average, customers
+		assign higher point values to Platform X than to other platforms.
+	</p>
+	<p>
+		<b>Each round, you can choose to pitch the same 3 platforms</b> you chose in the previous round, <b>or
+		you can swap</b> out any or all of <b>those platforms for different ones</b>.  At the end of each round,
+		<b>we will add together the points the customer assigns to each platform in your pitch to come up with
+		your Total Pitch Score for that round</b>.
+	</p>
+	<p>
+		Your Total Pitch Scores will determine the size of the bonus payment you receive. <b>At the end of the 
+		game, we will add up the Total Pitch Scores you earned each round to determine your bonus</b>.  You will
+		earn a bonus of 1 cent for every 100 game points (example: 5000 game points = $0.50 bonus).  On average,
+		people earn a bonus of about $6.00.
+	</p>
+</div>
+	<br><br>
+	{% next_button %}
+	
+{% endblock %}
+
+

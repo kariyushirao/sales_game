@@ -1,0 +1,305 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	input[type="textarea"],
+	textarea {
+		height: 75px;
+		padding: 0;
+		border: none;
+	}
+	.myClass::-webkit-slider-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 2px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-webkit-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassFF::-moz-range-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-moz-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassMS::-ms-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		margin-top: -8px !important;
+	}
+
+	input[type=range] {
+		-webkit-appearance: none;
+		margin: 10px 0;
+		height: 8px;
+		width: 100%;
+		border: 1px solid white;
+	}
+	input[type=range]:focus {
+		outline: none;
+	}
+	input[type=range]::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background: #64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-webkit-slider-thumb {
+		border: 0px;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-webkit-appearance: none;
+	}
+	input[type=range]::-moz-range-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background:#64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-moz-range-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-moz-appearance: none;
+	}
+	input[type=range]::-moz-focus-outer {
+    	border: 0;
+    	outline: none;
+    }
+	input[type=range]::-ms-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		background:transparent;
+		border-color:transparent;
+		border-width: 16px 0;
+		color: transparent;
+	}
+	input[type=range]::-ms-fill-lower {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-lower {
+    	background: #64bbf5;
+    }
+    input[type=range]::-ms-fill-upper {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-upper {
+    	background: #64bbf5;
+    }
+	input[type=range]::-ms-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+	}
+</style>
+<script>
+	groupsize = {{ groupsize }};
+	if(groupsize > 1) {
+		if(groupsize == 3) {
+			$('#id_checkslider_alter3_help').val(1);
+			$('#id_checkslider_alter4_help').val(1);
+			$('#id_checkslider_alter5_help').val(1);
+		} else if(groupsize == 4) {
+			$('#id_checkslider_alter4_help').val(1);
+			$('#id_checkslider_alter5_help').val(1);
+		} else if(groupsize == 5) {
+			$('#id_checkslider_alter5_help').val(1);
+		}
+	}
+
+	$(document).ready(function () {
+	 	$('input[name=selfassessment').on('input change', function () {
+	  		$('input[name=selfassessment]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_selfassessment').val(1);
+	  	});
+	  	if(groupsize > 1) {
+		  	$('input[name=alter1_help').on('input change', function () {
+		  		$('input[name=alter1_help]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+		  		$('#id_checkslider_alter1_help').val(1);
+		  	});
+		  	$('input[name=alter2_help').on('input change', function () {
+		  		$('input[name=alter2_help]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+		  		$('#id_checkslider_alter2_help').val(1);
+		  	});
+	  	}
+	  	if(groupsize > 3) {
+		  	$('input[name=alter3_help').on('input change', function () {
+		  		$('input[name=alter3_help]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+		  		$('#id_checkslider_alter3_help').val(1);
+		  	});
+	  	}
+	  	if(groupsize > 4) {
+		  	$('input[name=alter4_help').on('input change', function () {
+		  		$('input[name=alter4_help]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+		  		$('#id_checkslider_alter4_help').val(1);
+		  	});
+	  	}
+	  	if(groupsize > 5) {
+		  	$('input[name=alter5_help').on('input change', function () {
+		  		$('input[name=alter5_help]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+		  		$('#id_checkslider_alter5_help').val(1);
+		  	});
+	  	}
+	});
+</script>
+{% endblock %}
+
+{% block title %}
+	Wrap Up: Final Questions
+{% endblock %}
+
+{% block content %}
+
+	<input type="hidden" name="checkslider_selfassessment" id="id_checkslider_selfassessment"/>
+	{{ form.checkslider_selfassessment.errors }}
+	{% if groupsize > 1 %}
+		<input type="hidden" name="checkslider_alter1_help" id="id_checkslider_alter1_help"/>
+		<input type="hidden" name="checkslider_alter2_help" id="id_checkslider_alter2_help"/>
+		{{ form.checkslider_alter1_help.errors }}
+		{{ form.checkslider_alter2_help.errors }}
+	{% endif %}
+	{% if groupsize > 3 %}
+		<input type="hidden" name="checkslider_alter3_help" id="id_checkslider_alter3_help"/>
+		{{ form.checkslider_alter3_help.errors }}
+	{% endif %}
+	{%if groupsize > 4%}
+		<input type="hidden" name="checkslider_alter4_help" id="id_checkslider_alter4_help"/>
+		{{ form.checkslider_alter4_help.errors }}
+	{% endif %}
+	{% if groupsize > 5 %}
+		<input type="hidden" name="checkslider_alter5_help" id="id_checkslider_alter5_help"/>
+		{{ form.checkslider_alter5_help.errors }}
+	{% endif %}
+
+	<p><big>Last few questions before we wrap up...</big></p>
+
+	{% if groupsize > 1 %}
+		<p><b>Do you feel like the other players in your group helped you perform better in The Sales Game?</b>
+		Use the sliding scales below to indicate how much you feel each of the other players helped or 
+		harmed your performance in The Sales Game. Select "Very Helpful" if you feel like the player had 
+		a big positive impact on your performance, or select "Very Harmful" if you feel like the player had
+		a big negative impact on your performance.</p>
+		
+			<p style="text-align: center"><b>Player {{ alter1_id }} </b></p>
+			<div style="width: 625px; margin: 0 auto;">
+			<p style="float:left">Very Harmful&emsp;</p>
+			<p style="float:right">Very Helpful</p>
+				{% formfield player.alter1_help with label="" %}
+			</div><br>
+
+			<p style="text-align: center"><b>Player {{ alter2_id }} </b></p>
+			<div style="width: 625px; margin: 0 auto;">
+			<p style="float:left">Very Harmful&emsp;</p>
+			<p style="float:right">Very Helpful</p>
+				{% formfield player.alter2_help with label="" %}
+			</div><br>
+
+			{% if groupsize > 3 %}
+
+			<p style="text-align: center"><b>Player {{ alter3_id }} </b></p>
+			<div style="width: 625px; margin: 0 auto;">
+			<p style="float:left">Very Harmful&emsp;</p>
+			<p style="float:right">Very Helpful</p>
+				{% formfield player.alter3_help with label="" %}
+			</div><br>
+
+			{% endif %}
+
+			{% if groupsize > 4 %}
+
+			<p style="text-align: center"><b>Player {{ alter4_id }} </b></p>
+			<div style="width: 625px; margin: 0 auto;">
+			<p style="float:left">Very Harmful&emsp;</p>
+			<p style="float:right">Very Helpful</p>
+				{% formfield player.alter4_help with label="" %}
+			</div><br>
+
+			{% endif %}
+
+			{% if groupsize > 5 %}
+
+			<p style="text-align: center"><b>Player {{ alter5_id }} </b></p>
+			<div style="width: 625px; margin: 0 auto;">
+			<p style="float:left">Very Harmful&emsp;</p>
+			<p style="float:right">Very Helpful</p>
+				{% formfield player.alter5_help with label="" %}
+			</div><br>
+
+			{% endif %}
+
+	{% endif %}
+
+	<p><b>What advice would you give your friends to help them perform well in this game?</b>  Imagine your close 
+	friends are about to play The Sales Game.  What strategy should they use?<br>
+	(One or two sentences is enough.)</p>
+	{% formfield player.strategy with label = "" %}
+
+	<br>
+	<p><b>How do you think your performance in The Sales Game compares with other players?</b>  Indicate your response 
+	on the scale below.  At least 100 people have played The Sales Game so far.  Select "Worst Performance" if you think 
+	every other person performed better than you did.  Select "Best Performance" if you think you performed better than 
+	every other person who has played the game.</p>
+
+	<div style="float:center; width: 725px; margin: 0 auto; padding: 5px">
+		<p style="float:left"><strong>Worst Performance&emsp;</strong></p>
+		<p style="float:right"><strong>Best Performance</strong></p>
+			{% formfield player.selfassessment with label="" %}
+	</div>
+
+	<br>
+	<p><b>Do you have any other feedback</b> about any part of this game or your experience that you would like to share
+	with us?<br>
+	(If not, just type NA.)</p>
+	{% formfield player.comments with label = "" %}
+
+	<br>
+	<b>That's it! Click Next to complete this HIT.</b>
+	<br><br>
+
+	{% next_button %}
+	
+{% endblock %}

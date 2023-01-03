@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }} Summary
+{% endblock %}
+
+{% block content %}
+
+	{% if is_dropout == True %}
+		<span style="color:crimson;"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+	{% endif %}
+
+<p><big><b>Summary of your performance for {{ company_name }}</b></big></p>
+
+<div class="instructions well well-lg">
+	<p>
+		<big>Phase {{ phase }} is Complete! You have submitted all 15 pitches for {{ company_name }}.</big>  
+	</p>
+	<p>
+		<b>Sum of your Total Pitch Scores for {{ company_name }}:
+		<span style="color:blue;"><big>{{ company_score }}</big></span></b>
+	</p>
+	<p>
+		<b>Bonus for {{ company_name }}: <span style="color:blue;"><big>{{ company_bonus }}</big></span></b>
+	</p>
+	{% if subsession.round_number < 45 %}
+		<p>
+			<b>Click Next to learn about the company you will work for in Phase {{ nextphase }}.</b>
+		</p>
+	{% else %}
+		<p>
+			Click Next to see your final results for all three phases of the game.
+		</p>
+	{% endif %}
+</div>
+	
+	{% next_button %}
+	
+{% endblock %}

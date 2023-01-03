@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-form-errors {
+		height: 0px;
+		visibility: hidden;
+		position: fixed;
+		top: 10px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 6 / 6
+{% endblock %}
+
+{% block content %}
+
+	<p style="color:darkred; background-color: rgba(247, 130, 109, 0.25)">
+		<b>NOTE:</b> During the real game, <b>you will only have 60 seconds to submit your pitch.</b>  
+		   After 60 seconds, the page will automatically submit an empty pitch, and you will receive 
+		   a Total Pitch Score of ZERO for that round.  <b>If you repeatedly fail to submit your responses
+		   before time runs out, you will be marked as a DROPOUT and you will not receive the $4.00
+		   Active Participation Bonus. </b> Make sure you always submit your pitch in less than 60 seconds.
+	</p>
+	<p><big><b>Build your sales pitch for Company F</b></big></p>
+	<p>
+		<b>Starting with your second pitch</b> for each company, you'll be able to see the results from 
+		the pitch you made in the previous round, and from the highest-scoring pitch you've made so far.
+		You can see what this will look like in the still image below.
+	</p>
+	<p>
+		<i>This is just a still image of what the screen might look like when you are selecting your pitch on 
+		the second round.</i>
+	</p>
+
+	<div style="float:none; width: 100%; margin: 0 auto; height: 500px; outline-style:solid; outline-width:1px;">
+		<img style="height:500px;" img src="{% static demo3 %}"/>
+	</div>
+
+	<br><br>
+	{% next_button %}
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++;
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	Comprehension Check
+{% endblock %}
+
+{% block content %}
+
+	<p><b>Please answer the questions below to confirm you understand The Sales Game instructions.</b>
+	<br><i>(The important parts of the instructions are reprinted at the bottom of this page in case you 
+	have any trouble.)</i>
+	</p><br>
+
+	<b>1. How many pitches will you make for each of the 3 companies you will work for?</b>
+    {% formfield player.comprehension1 with label=""%}
+
+    <b>2. How many software platforms can you include in each sales pitch?</b>
+    {% formfield player.comprehension2 with label=""%}
+
+    <b>3. Finish this sentence: "The Total Pitch Score is calculated by..."</b>
+    {% formfield player.comprehension3 with label=""%}
+
+    <b>4. How will your bonus be determined at the end of the game?</b>
+    {% formfield player.comprehension4 with label=""%}
+
+    <b>5. Which statement is true about the software platforms each company sells?</b>
+    {% formfield player.comprehension5 with label=""%}
+
+    <b>6. Which statement is true about how each company's customers assign points to its platforms?</b>
+    {% formfield player.comprehension6 with label=""%}
+
+  	<b>7. What information do customers use to judge the value of software platforms?</b>
+    {% formfield player.comprehension7 with label=""%}
+
+    <br><br>{% next_button %}
+
+<br><br>
+<div class="instructions well well-lg">
+	<h5>The Sales Game: Instructions</h5>
+	<br><p>  
+		You will work for <b>three different software companies</b>. Each company makes 20 different
+		software platforms and each platform supports a separate key business process. <b>You will pitch
+		each company's software platforms 15 times (to 15 different customers)</b>. Each company caters
+		to a different type of customer, so the software platforms each company makes are unique.    
+	</p>
+	<p>
+		Each time you make a sales pitch to a company's customer, <b>you can only include 3</b> of that
+		company's <b>software platforms in your sales pitch</b>. Each time you make a pitch the customer
+		will tell you how much they value the platforms in that pitch by assigning points to each platform.
+		<b>We will add up the points the customer assigns to the 3 platforms in your pitch to come up with
+		your Total Pitch Score</b>.
+	</p>
+	<p> 
+		Each of the <b>platforms</b> a company makes has a <b>different average value</b> to its customers.
+		Each company's <b>customers tend to agree about which of that company's platforms are the most 
+		valuable</b>. A particular platform might earn slightly higher or lower points from different customers,
+		but <b>the amount of points each customer assigns to that platform will be close to that platform's 
+		average value</b>.
+	</p>
+	<p>
+		You will not receive any information about what each platform does.  But, <b>customers DO know what each 
+		platform does</b>, and <b>they will evaluate each platform in your pitch based on how valuable that 
+		platform's function is to their business</b>.
+	</p>
+	<p>
+		To maximize your score (and <b>to maximize your bonus</b>), you need to <b>figure out which platforms 
+		each company's customers value most</b>.  At the end of The Sales Game, <b>we will add up all of the Total Pitch 
+		Scores you earned each round to determine your bonus</b>.
+	</p>
+
+</div>
+
+
+{% endblock %}

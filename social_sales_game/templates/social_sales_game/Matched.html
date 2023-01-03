@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1.67em;
+		margin-bottom: 1.67em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	You've been matched!
+{% endblock %}
+
+{% block content %}
+
+	<p>
+		<big><b>You have been matched with {{ groupsize }} other players. You are Player {{ playerid }} in your group.</b></big>
+	</p>
+	<p>
+		Click Next to start the game.
+	</p><br>
+
+	{% next_button %}
+	
+{% endblock %}

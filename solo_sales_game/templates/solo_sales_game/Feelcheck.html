@@ -1,0 +1,245 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.myClass::-webkit-slider-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 2px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-webkit-appearance: none !important;
+		margin-top: -8px !important;
+	}
+
+	.myClassFF::-moz-range-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-moz-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassMS::-ms-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		margin-top: -8px !important;
+	}
+
+	input[type=range] {
+		-webkit-appearance: none;
+		margin: 10px 0;
+		height: 8px;
+		width: 100%;
+		border: 1px solid white;
+	}
+	input[type=range]:focus {
+		outline: none;
+	}
+	input[type=range]::-moz-focus-outer {
+    	border: 0;
+    	outline: none;
+    }
+	input[type=range]::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background: #64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-moz-range-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background:#64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::ms-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background: transparent;
+		border-color: transparent;
+		color: transparent;
+	}
+	input[type=range]::-webkit-slider-thumb {
+		border: 0px;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-webkit-appearance: none;
+	}
+	input[type=range]::-moz-range-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-moz-appearance: none;
+	}
+	input[type=range]::-ms-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+	}
+</style>
+<script>
+	$(document).ready(function () {
+	 	$('input[name=feelcheck_happy').on('input change', function () {
+	  		$('input[name=feelcheck_happy]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_happy').val(1);
+	  	});
+	  	$('input[name=feelcheck_frustrated').on('input change', function () {
+	  		$('input[name=feelcheck_frustrated]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_frustrated').val(1);
+	  	});
+	  	$('input[name=feelcheck_successful').on('input change', function () {
+	  		$('input[name=feelcheck_successful]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_successful').val(1);
+	  	});
+	  	$('input[name=feelcheck_friendly').on('input change', function () {
+	  		$('input[name=feelcheck_friendly]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_friendly').val(1);
+	  	});
+	  	$('input[name=feelcheck_hostile').on('input change', function () {
+	  		$('input[name=feelcheck_hostile]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_hostile').val(1);
+	  	});
+	  	$('input[name=feelcheck_anxious').on('input change', function () {
+	  		$('input[name=feelcheck_anxious]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_anxious').val(1);
+	  	});
+
+	});
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: How Are You Feeling Right Now?
+{% endblock %}
+
+{% block content %}
+
+	<input type="hidden" name="checkslider_happy" id="id_checkslider_happy"/>
+	<input type="hidden" name="checkslider_frustrated" id="id_checkslider_frustrated"/>
+	<input type="hidden" name="checkslider_successful" id="id_checkslider_successful"/>
+	<input type="hidden" name="checkslider_friendly" id="id_checkslider_friendly"/>
+	<input type="hidden" name="checkslider_hostile" id="id_checkslider_hostile"/>
+	<input type="hidden" name="checkslider_anxious" id="id_checkslider_anxious"/>
+
+	{{ form.checkslider_happy.errors }}
+	{{ form.checkslider_frustrated.errors }}
+	{{ form.checkslider_successful.errors }}
+	{{ form.checkslider_friendly.errors }}
+	{{ form.checkslider_hostile.errors }}
+	{{ form.checkslider_anxious.errors }}
+
+	{% if is_dropout == True %}
+		<span style="color:crimson;"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+	{% else %}
+		<br>
+	{% endif %}
+	<p><big><b>How are you feeling right now?</b></big></p>
+
+	<p>
+		Please rate each feeling below on the scales given. A rating of <b>0 means that you are not experiencing 
+		that feeling at all</b> right now. A rating of <b>100 means you are experiencing that feeling very much
+		</b> right now. 
+	</p>
+	<p><i>(Click on each slider bar to make the selector button appear.)</i></p>
+
+	{% for field in form %}
+		{% if field.name == 'feelcheck_happy' %}
+			<p style="text-align: center"><b>Happy</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% elif field.name == 'feelcheck_frustrated' %}
+			<p style="text-align: center"><b>Frustrated</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% elif field.name == 'feelcheck_successful' %}
+			<p style="text-align: center"><b>Successful</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% elif field.name == 'feelcheck_friendly' %}
+			<p style="text-align: center"><b>Friendly</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% elif field.name == 'feelcheck_hostile' %}
+			<p style="text-align: center"><b>Hostile</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% elif field.name == 'feelcheck_anxious' %}
+			<p style="text-align: center"><b>Anxious</b></p>
+			<div style="width: 700px; margin: 0 auto;">
+			<p style="float:left">(Not At All)&emsp; <b><big>0&emsp;</big></b></p>
+			<p style="float:right"><b><big>100</b></big> &emsp;(Very Much)</p>
+				{% formfield field with label="" %}
+			</div><br>
+		{% endif %}
+	{% endfor %}	
+
+	{% next_button %}
+	
+{% endblock %}
+
+

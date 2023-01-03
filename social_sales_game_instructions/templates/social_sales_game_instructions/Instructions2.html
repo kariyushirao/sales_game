@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 2 / 6
+{% endblock %}
+
+{% block content %}
+
+<div class="instructions well well-lg">
+	<p><i>(Read these instructions carefully. There will be a comprehension check at the end.)</i></p>
+	<p>
+		Each company's customers have similar business needs, so they tend to agree about which platforms 
+		are more valuable than others. <b>Each company sells 20 separate platforms, and each platform has 
+		a different average value to that company's customers</b>. The number of <b>points that a company's
+		customers assign</b> to each of its platforms <b>will be close to that platform's average value</b>,
+		but might be a few points higher or lower, depending on the customer.  Remember, to maximize your
+		score (and <b>to maximize your bonus</b>), you need to <b>find the platforms that earn the highest 
+		average point values</b> from each company's customers.
+	</p>
+	<p>
+		To make sure this game is fair, you won’t receive any information about what each platform does.
+		(This prevents people with professional experience selling software platforms from having an 
+		advantage.)  <b>The only background information you will receive about each of the 20 platforms 
+		each company makes is the platform's code name</b>.  However, <b>your customers DO know what each 
+		platform does, and they will assign points to each platform based on how useful it is to them</b>.  
+		Customers are not evaluating the platforms based on their code names, but on what the platforms do.
+	</p>
+</div>
+	
+	<br><br>
+	{% next_button %}
+	
+{% endblock %}

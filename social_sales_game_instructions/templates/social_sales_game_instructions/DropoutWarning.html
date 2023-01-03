@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1.67em;
+		margin-bottom: 1.67em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	WARNING
+{% endblock %}
+
+{% block content %}
+
+	<p>
+		<big><b>WARNING: EACH PAGE HAS A TIME LIMIT.  IF YOU <u>REPEATEDLY</u> FAIL TO SUBMIT YOUR RESPONSES
+		BEFORE THE TIME LIMITS, YOU WILL BE MARKED AS A DROPOUT.  IF YOU ARE MARKED AS A DROPOUT, YOU
+		WILL BE PUSHED TO THE END OF THE GAME, AND YOU WILL NOT RECEIVE THE $4.00 ACTIVE PARTICIPATION BONUS.</b></big>
+	</p>
+	<br>
+	<br><br>
+	<p>
+		Click Next to enter the waiting room where you will be matched with your group.
+	</p>
+
+	<br>
+
+	{% next_button %}
+	
+{% endblock %}

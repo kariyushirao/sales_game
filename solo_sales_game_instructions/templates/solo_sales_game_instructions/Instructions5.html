@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	var popUpCounter = 0;
+	window.onblur = function() {
+		if(popUpCounter < 1) {
+			alert("Please do not leave this experiment until it is complete");
+		}
+		popUpCounter ++; 
+	}
+</script>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: Instructions Page 5 / 6
+{% endblock %}
+
+{% block content %}
+
+	<p style="color:darkred; background-color: rgba(247, 130, 109, 0.25)">
+		<b>NOTE:</b> During the real game, <b>you will only have 60 seconds to review this feedback.</b>  
+		After 60 seconds, the page will automatically advance to the next round. 
+	</p>
+	<p><big><b>Feedback from Company F's Customer</b></big></p>
+	<p>
+		After you submit a pitch, we will show you how many points the customer assigned to each of the  
+		3 platforms in your pitch.  We will also show you the <b>Total Pitch Score</b>, which is <b>the  
+		sum of the points assigned to each platform</b>. Below, you can see the points, and the Total Pitch 
+		Score, that Company F's customer assigned to the pitch selected in the video you just watched.
+	</p>
+	
+	<p><i>This is just a still image of what the screen might look like when you receive customer feedback. </i></p>
+	<div style="float:none; width: 100%; margin: 0 auto; height: 250px; outline-style:solid; outline-width:1px;">
+		<img style="height:250px;" img src="{% static demo2 %}"/>
+	</div>
+
+	<br><br>
+	
+	{% next_button %}
+	
+{% endblock %}
+
+

@@ -1,0 +1,223 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+	    background-color: rgba(255, 99, 71, 0.35);
+	    border: crimson;
+	    color: crimson;
+	    position: fixed;
+	    top: 10px;
+	    right: 10px;
+	    width: 350px;
+	    height: 45px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }} Check-In
+{% endblock %}
+
+{% block content %}
+
+	{% if is_dropout == True %}
+		<span style="color:crimson;"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+	{% else %}
+		<br>
+	{% endif %}
+	<p><big><b>What is each platform's average point value?</b></big></p>
+	<p>
+		<b>Indicate how many points you think {{ company_name }}'s customers assign to each platform, on average</b>. 
+		<b>Start with the platform that you think has the highest average point value, then work your way down
+		to the lowest.</b>
+	</p>
+	<p>
+		If you haven't included a platform in one of your pitches yet, <b>just take your best guess</b>
+		about that platform's average point value. <i>(Enter each of your responses below as a whole 
+		number, using the numeric keys on your keyboard.)</i>
+	</p>
+
+	<table>
+		<tr>
+			<td><b>Platform</b></td>
+			<td style="width:30px;"></td>
+			<td><b>Points</b></td>
+			<td style="width:40px;"></td>
+			<td><b>Platform</b></td>
+			<td style="width:30px;"></td>
+			<td><b>Points</b></td>
+			<td style="width:40px;"></td>
+			<td><b>Platform</b></td>
+			<td style="width:30px;"></td>
+			<td><b>Points</b></td>
+			<td style="width:40px;"></td>
+			<td><b>Platform</b></td>
+			<td style="width:30px;"></td>
+			<td><b>Points</b></td>
+		</tr>
+		<tr style="height:10px;"></tr>
+		<tr>
+		{% if subsession.round_number < 16 %}
+			{% for field in form %}
+				{% if field.name == 'plat1_guess' %}
+					<td><b>Canary</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat2_guess' %}
+					<td><b>Cardinal</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat3_guess' %}
+					<td><b>Finch</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat4_guess' %}
+					<td><b>Grackle</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat5_guess' %}
+					<td><b>Jackdaw</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat6_guess' %}
+					<td><b>Lark</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat7_guess' %}
+					<td><b>Longspur</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat8_guess' %}
+					<td><b>Magpie</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat9_guess' %}
+					<td><b>Martin</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat10_guess' %}
+					<td><b>Munia</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat11_guess' %}
+					<td><b>Oriole</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat12_guess' %}
+					<td><b>Pipit</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat13_guess' %}
+					<td><b>Robin</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat14_guess' %}
+					<td><b>Sparrow</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat15_guess' %}
+					<td><b>Starling</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat16_guess' %}
+					<td><b>Swallow</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat17_guess' %}
+					<td><b>Tanager</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat18_guess' %}
+					<td><b>Thrush</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat19_guess' %}
+					<td><b>Warbler</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat20_guess' %}
+					<td><b>Wren</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% endif %}
+				{% if forloop.counter|divisibleby:"4"%}
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% elif subsession.round_number > 15 and subsession.round_number < 31 %}
+			{% for field in form %}
+				{% if field.name == 'plat1_guess' %}
+					<td><b>Ajwain</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat2_guess' %}
+					<td><b>Anise</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat3_guess' %}
+					<td><b>Annatto</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat4_guess' %}
+					<td><b>Cardamom</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat5_guess' %}
+					<td><b>Cinnamon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat6_guess' %}
+					<td><b>Cumin</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat7_guess' %}
+					<td><b>Dill</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat8_guess' %}
+					<td><b>Fennel</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat9_guess' %}
+					<td><b>Fenugreek</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat10_guess' %}
+					<td><b>Galangal</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat11_guess' %}
+					<td><b>Ginger</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat12_guess' %}
+					<td><b>Mahleb</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat13_guess' %}
+					<td><b>Mustard</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat14_guess' %}
+					<td><b>Nigella</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat15_guess' %}
+					<td><b>Nutmeg</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat16_guess' %}
+					<td><b>Paprika</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat17_guess' %}
+					<td><b>Pepper</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat18_guess' %}
+					<td><b>Saffron</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat19_guess' %}
+					<td><b>Sumac</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat20_guess' %}
+					<td><b>Turmeric</b></td><td></td><td>{% formfield field %}</td><td></td>				
+				{% endif %}
+				{% if forloop.counter|divisibleby:"4"%}
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% else %}
+			{% for field in form %}
+				{% if field.name == 'plat1_guess' %}
+					<td><b>Argon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat2_guess' %}
+					<td><b>Bismuth</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat3_guess' %}
+					<td><b>Bromine</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat4_guess' %}
+					<td><b>Carbon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat5_guess' %}
+					<td><b>Cobalt</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat6_guess' %}
+					<td><b>Copper</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat7_guess' %}
+					<td><b>Gallium</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat8_guess' %}
+					<td><b>Helium</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat9_guess' %}
+					<td><b>Hydrogen</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat10_guess' %}
+					<td><b>Iodine</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat11_guess' %}
+					<td><b>Iron</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat12_guess' %}
+					<td><b>Mercury</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat13_guess' %}
+					<td><b>Neon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat14_guess' %}
+					<td><b>Nickel</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat15_guess' %}
+					<td><b>Oxygen</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat16_guess' %}
+					<td><b>Tin</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat17_guess' %}
+					<td><b>Radon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat18_guess' %}
+					<td><b>Rhodium</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat19_guess' %}
+					<td><b>Xenon</b></td><td></td><td>{% formfield field %}</td><td></td>
+				{% elif field.name == 'plat20_guess' %}
+					<td><b>Zinc</b></td><td></td><td>{% formfield field %}</td><td></td>		
+				{% endif %}
+				{% if forloop.counter|divisibleby:"4"%}
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</table>
+
+	<br><br>
+	
+	{% next_button %}
+	
+{% endblock %}

@@ -1,0 +1,546 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block scripts %}
+<style>
+	.otree-timer {
+    background-color: rgba(255, 99, 71, 0.35);
+    border: crimson;
+    color: crimson;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 350px;
+    height: 45px;
+	}
+
+	.otree-form-errors {
+		height: 0px;
+		visibility: hidden;
+		position: fixed;
+		top: 10px;
+	}
+
+	ul {
+	  	list-style-type: none;
+	}
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color: white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+</style>
+<script>
+	curr_round = {{ curr_round }};
+	groupsize = {{ groupsize }};
+
+	document.getElementById("id_stub_msg").style.visibility='hidden';
+	document.getElementById("id_p_list_selected").style.visibility='hidden';
+	document.getElementById("id_curr_score").style.visibility='hidden';
+	document.getElementById("id_p_name_0").style.visibility='hidden';
+	document.getElementById("id_p_points_0").style.visibility='hidden';
+	document.getElementById("id_p_name_1").style.visibility='hidden';
+	document.getElementById("id_p_points_1").style.visibility='hidden';
+	document.getElementById("id_p_name_2").style.visibility='hidden';
+	document.getElementById("id_p_points_2").style.visibility='hidden';
+
+	if(groupsize > 1) {
+		document.getElementById("id_alter1_clicks").style.visibility='hidden';
+		document.getElementById("id_alter2_clicks").style.visibility='hidden';
+		document.getElementById("id_alter3_clicks").style.visibility='hidden';
+		document.getElementById("id_alter4_clicks").style.visibility='hidden';
+		document.getElementById("id_alter5_clicks").style.visibility='hidden';
+	}
+	
+	if(curr_round != 1 && curr_round != 16 && curr_round != 31 && groupsize > 1) {
+		document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+		document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+		document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+		document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+		document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+		if(groupsize == 1) {
+			document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+			document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+			document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+			document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+			document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+		} else if(groupsize == 3) {
+			document.getElementById("id_alter3_button").style.visibility='hidden';
+			document.getElementById("id_alter4_button").style.visibility='hidden';
+			document.getElementById("id_alter5_button").style.visibility='hidden';
+		} else if(groupsize == 4) {
+			document.getElementById("id_alter4_button").style.visibility='hidden';
+			document.getElementById("id_alter5_button").style.visibility='hidden';
+		} else if(groupsize == 5) {
+			document.getElementById("id_alter5_button").style.visibility='hidden';
+		}
+	}
+
+	// If the participant opens the Page Source code in their browser, they would be able to see the realized point 
+	// values sent to the DOM for the current trial.  To prevent this highly unlikely form of cheating, I also pass
+	// the below dictionaries of nonsense values so that it is difficult for the cheater to figure out which 
+	// dictionary in the source code contains the true game values.
+	var PLATFORM_VALUES = [['Ajwain', 194], ['Anise', 294], ['Annatto', 407], ['Cardamom', 296], ['Cinnamon', 295], ['Cumin', 405], ['Dill', 298], ['Fennel', 192], ['Fenugreek', 402], ['Galangal', 406], ['Ginger', 299], ['Mahleb', 300], ['Mustard', 401], ['Nigella', 293], ['Nutmeg', 297], ['Paprika', 404], ['Pepper', 400], ['Saffron', 191], ['Sumac', 408], ['Turmeric', 403]];var POINT_VALUES = [['Argon', 269], ['Bismuth', 162], ['Bromine', 160], ['Carbon', 163], ['Cobalt', 268], ['Copper', 265], ['Gallium', 56], ['Helium', 53], ['Hydrogen', 54], ['Iodine', 158], ['Iron', 161], ['Mercury', 55], ['Neon', 159], ['Nickel', 266], ['Oxygen', 164], ['Tin', 267], ['Radon', 264], ['Rhodium', 52], ['Xenon', 57], ['Zinc', 58]];var PLATFORM_VALUES = [['Canary', 956], ['Cardinal', 957], ['Finch', 743], ['Grackle', 852], ['Jackdaw', 742], ['Lark', 849], ['Longspur', 955], ['Magpie', 954], ['Martin', 746], ['Munia', 850], ['Oriole', 745], ['Pipit', 744], ['Robin', 748], ['Sparrow', 953], ['Starling', 747], ['Swallow', 848], ['Tanager', 952], ['Thrush', 744], ['Warbler', 851], ['Wren', 743]];var POINT_VALUES = [['Ajwain', 64], ['Anise', 164], ['Annatto', 277], ['Cardamom', 166], ['Cinnamon', 165], ['Cumin', 275], ['Dill', 168], ['Fennel', 62], ['Fenugreek', 272], ['Galangal', 276], ['Ginger', 169], ['Mahleb', 170], ['Mustard', 271], ['Nigella', 263], ['Nutmeg', 167], ['Paprika', 274], ['Pepper', 270], ['Saffron', 61], ['Sumac', 278], ['Turmeric', 273]];var POINT_VALUES = [['Canary', 456], ['Cardinal', 457], ['Finch', 243], ['Grackle', 352], ['Jackdaw', 242], ['Lark', 349], ['Longspur', 455], ['Magpie', 454], ['Martin', 246], ['Munia', 350], ['Oriole', 245], ['Pipit', 244], ['Robin', 248], ['Sparrow', 453], ['Starling', 247], ['Swallow', 348], ['Tanager', 452], ['Thrush', 244], ['Warbler', 351], ['Wren', 243]];var PLATFORM_POINTS = [['Canary', 256], ['Cardinal', 257], ['Finch', 43], ['Grackle', 152], ['Jackdaw', 42], ['Lark', 149], ['Longspur', 255], ['Magpie', 254], ['Martin', 46], ['Munia', 150], ['Oriole', 45], ['Pipit', 44], ['Robin', 48], ['Sparrow', 253], ['Starling', 47], ['Swallow', 148], ['Tanager', 252], ['Thrush', 44], ['Warbler', 151], ['Wren', 43]];var PLATFORM_VALUES = [['Argon', 999], ['Bismuth', 892], ['Bromine', 890], ['Carbon', 893], ['Cobalt', 998], ['Copper', 995], ['Gallium', 786], ['Helium', 783], ['Hydrogen', 784], ['Iodine', 888], ['Iron', 891], ['Mercury', 785], ['Neon', 889], ['Nickel', 996], ['Oxygen', 894], ['Tin', 997], ['Radon', 994], ['Rhodium', 782], ['Xenon', 787], ['Zinc', 788]];var PLATFORM_POINTS = [['Argon', 499], ['Bismuth', 392], ['Bromine', 390], ['Carbon', 393], ['Cobalt', 498], ['Copper', 495], ['Gallium', 286], ['Helium', 283], ['Hydrogen', 284], ['Iodine', 388], ['Iron', 391], ['Mercury', 285], ['Neon', 389], ['Nickel', 496], ['Oxygen', 394], ['Tin', 497], ['Radon', 494], ['Rhodium', 282], ['Xenon', 287], ['Zinc', 288]];var POINT_VALUES = [['Canary', 226], ['Cardinal', 227], ['Finch', 13], ['Grackle', 122], ['Jackdaw', 12], ['Lark', 119], ['Longspur', 225], ['Magpie', 224], ['Martin', 16], ['Munia', 120], ['Oriole', 15], ['Pipit', 14], ['Robin', 18], ['Sparrow', 223], ['Starling', 17], ['Swallow', 118], ['Tanager', 222], ['Thrush', 14], ['Warbler', 121], ['Wren', 13]];var PLATFORM_POINTS = [['Ajwain', 694], ['Anise', 794], ['Annatto', 907], ['Cardamom', 796], ['Cinnamon', 795], ['Cumin', 905], ['Dill', 798], ['Fennel', 692], ['Fenugreek', 902], ['Galangal', 906], ['Ginger', 799], ['Mahleb', 800], ['Mustard', 901], ['Nigella', 693], ['Nutmeg', 797], ['Paprika', 904], ['Pepper', 900], ['Saffron', 691], ['Sumac', 908], ['Turmeric', 903]];var POINT_VALUES = [['Ajwain', 94], ['Anise', 194], ['Annatto', 307], ['Cardamom', 196], ['Cinnamon', 195], ['Cumin', 305], ['Dill', 198], ['Fennel', 92], ['Fenugreek', 302], ['Galangal', 306], ['Ginger', 199], ['Mahleb', 200], ['Mustard', 301], ['Nigella', 293], ['Nutmeg', 197], ['Paprika', 304], ['Pepper', 300], ['Saffron', 91], ['Sumac', 308], ['Turmeric', 303]];var POINT_VALUES = [['Argon', 299], ['Bismuth', 192], ['Bromine', 190], ['Carbon', 193], ['Cobalt', 298], ['Copper', 295], ['Gallium', 86], ['Helium', 83], ['Hydrogen', 84], ['Iodine', 188], ['Iron', 191], ['Mercury', 85], ['Neon', 189], ['Nickel', 296], ['Oxygen', 194], ['Tin', 297], ['Radon', 294], ['Rhodium', 82], ['Xenon', 87], ['Zinc', 88]]; var platform_list = {{ platform_list|json }};
+
+	function populateOptions(list) {
+		platform_listbox = document.getElementById("id_platform_list");
+		for(i = 0;i < platform_list.length; i++) {
+			var option = document.createElement("option");
+			option.text = platform_list[i][0];
+			option.value = platform_list[i][1];
+			platform_listbox.options.add(option);
+		}
+	}
+
+	function listboxMoveAcross(sourceID, destID) {
+		var source = document.getElementById(sourceID);
+		var dest = document.getElementById(destID);
+
+		for(i = 0; i < source.options.length; i++) {
+			if(source.options[i].selected == true) {
+				var option = source.options[i];
+				var new_option = document.createElement("option");
+				new_option.value = option.value;new_option.text = option.text;
+				try {
+					dest.add(new_option, null); 
+					source.remove(i, null);
+				}catch(error) {
+					dest.add(new_option); 
+					source.remove(i);
+				}
+				i--;
+			}
+		}
+	}
+
+	alter1_Clicks = 0;
+	alter2_Clicks = 0;
+	alter3_Clicks = 0;
+	alter4_Clicks = 0;
+	alter5_Clicks = 0;
+
+	function firstPull() {
+		alter1_Clicks += 1;
+		document.getElementById("id_alter1_Pitch").style.visibility='visible';
+ 		document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+	}
+
+	function secondPull() {
+		alter2_Clicks += 1;
+		document.getElementById("id_alter2_Pitch").style.visibility='visible';
+ 		document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+	}
+
+	function thirdPull() {
+		alter3_Clicks += 1;
+		document.getElementById("id_alter3_Pitch").style.visibility='visible';
+ 		document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+	}
+
+	function fourthPull() {
+		alter4_Clicks += 1;
+		document.getElementById("id_alter4_Pitch").style.visibility='visible';
+ 		document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter5_Pitch").style.visibility='hidden';
+	}
+
+	function fifthPull() {
+		alter5_Clicks += 1;
+		document.getElementById("id_alter5_Pitch").style.visibility='visible';
+ 		document.getElementById("id_alter1_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter2_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter3_Pitch").style.visibility='hidden';
+ 		document.getElementById("id_alter4_Pitch").style.visibility='hidden';
+	}
+
+
+	function validateForm() {
+		var source = document.getElementById('id_platform_list');
+		for(i = 0; i < source.options.length; i++) {
+			source.options[i].selected = false;
+		}
+
+		var dest = document.getElementById('id_pitch_list');
+		for(i = 0; i < dest.options.length; i++) {
+			dest.options[i].selected = true;
+		}
+
+		if(dest.options.length < 3) {
+			return false;
+		} else if(dest.options.length > 3) {
+			return false;
+		} else {
+			document.getElementById("id_stub_msg").value = 99;
+			var pitch_list = [];
+			var score = 0;
+			for(i = 0; i < dest.options.length; i++) {
+				p_name = dest.options[i].text;
+				p_points = parseInt(dest.options[i].value, 10);
+				pitch_list.push(p_name);
+				score = score + p_points;
+				document.getElementById("id_p_name_" + i).value = p_name;
+				document.getElementById("id_p_points_" + i).value = p_points;
+			}
+			document.getElementById("id_p_list_selected").value = pitch_list.join();
+			document.getElementById("id_curr_score").value = score;
+			if(groupsize > 1) {
+				document.getElementById("id_alter1_clicks").value = alter1_Clicks;
+				document.getElementById("id_alter2_clicks").value = alter2_Clicks;
+				document.getElementById("id_alter3_clicks").value = alter3_Clicks;
+				document.getElementById("id_alter4_clicks").value = alter4_Clicks;
+				document.getElementById("id_alter5_clicks").value = alter5_Clicks;
+			}
+			return true;
+		}
+	}
+</script>
+
+{% endblock %}
+
+{% block title %}
+	The Sales Game: {{ company_name }}
+{% endblock %}
+
+{% block content %}
+	
+	<h5><table style="width:100%">
+		<tr>
+			<td>
+				{{ company_name }} : Round {{ company_round }} / {{ Constants.cnum_rounds }}
+				{% if is_dropout == True %} 
+					<span style="color:crimson"><big><b>&emsp;&emsp;DROPOUT</b></big></span>
+				{% endif %}
+			</td>
+			{% if subsession.round_number == 1 %}
+				<td style="text-align:right;"></td>
+			{% elif subsession.round_number not in start_rounds %}
+				<td style="text-align:right;">{{ company_name }} Points: 
+					<span style="color:blue;"><big>{{ company_score }} ({{ company_bonus }})</big></span></td>
+			{% endif %}
+		</tr>
+	</table></h5>
+
+	<span style="color:red; font-weight:bold; ">
+		{{ form.stub_msg.errors }}
+	</span>
+
+	<body onLoad="populateOptions(platform_list)">
+
+	<input type="hidden" name="stub_msg" id="id_stub_msg"/>
+	<input type="hidden" name="p_list_selected" id="id_p_list_selected"/>
+	<input type="hidden" name="curr_score" id="id_curr_score"/>
+	<input type="hidden" name="p_name_0" id="id_p_name_0"/>
+	<input type="hidden" name="p_points_0" id="id_p_points_0"/>
+	<input type="hidden" name="p_name_1" id="id_p_name_1"/>
+	<input type="hidden" name="p_points_1" id="id_p_points_1"/>
+	<input type="hidden" name="p_name_2" id="id_p_name_2"/>
+	<input type="hidden" name="p_points_2" id="id_p_points_2"/>
+	<input type="hidden" name="browser_innerh" id="id_browser_innerh"/>
+	<input type="hidden" name="browser_innerw" id="id_browser_innerw"/>
+
+	{% if groupsize > 1 %}
+		<input type="hidden" name="alter1_clicks" id="id_alter1_clicks"/>
+		<input type="hidden" name="alter2_clicks" id="id_alter2_clicks"/>
+		<input type="hidden" name="alter3_clicks" id="id_alter3_clicks"/>
+		<input type="hidden" name="alter4_clicks" id="id_alter4_clicks"/>
+		<input type="hidden" name="alter5_clicks" id="id_alter5_clicks"/>
+	{% endif %}
+
+	<br><p><big><b>Choose 3 platforms to include in your pitch</b></big></p>
+	<p>
+		<b>To add a platform</b> to your pitch, <b>click on the name</b> of the platform <b>in the Platform List</b> 
+		on the left, <b>then click</b> the <b>ADD</b> button.  <b>If you change your mind</b> about a platform after 
+		adding it to your pitch, just <b>click on the name</b> of the platform <b>in Your Pitch</b> on the right, 
+		<b>then click</b> the <b>REMOVE</b> button. 
+		{% if subsession.round_number not in start_rounds and groupsize > 1 %}
+			<b>If you and another player BOTH shared your results with each other, you will be able to view
+			that player's results when you click on their button</b>.  If either you or the other player chose not to share 
+			your results with each other, you will see a note that says "Not Shared" when you click on that player's button.  
+		{% endif %}
+	</p>
+	<p>
+		<b>When you are done </b> editing your pitch, <b>click</b> the blue <b>SUBMIT</b> button at the bottom of the page.
+	</p>
+
+	<div style="width:100%; display:table;">
+		<div style="display:table-row">
+			<div style="width:400px; display:table-cell; vertical-align:top">
+				<table>
+					<tr valign="top">
+						<td align="center"><b>Platform List</b></td>
+						<td></td>
+						<td align="center"><b>Your Pitch</b></td>
+					</tr>
+					<tr valign="top">
+						<td>
+							<select id="id_platform_list" size="20" style="width: 120px; padding: 10px;"></select>
+						</td>
+						<td valign="center" style="padding: 10px;">
+							<br>
+							<button type="button" style="width: 90px" onclick="listboxMoveAcross('id_platform_list','id_pitch_list')">ADD</button>
+							<br><br>
+							<button type="button" style="width: 90px" onclick="listboxMoveAcross('id_pitch_list','id_platform_list')">REMOVE</button>
+						</td>
+						<td>
+							<select multiple id="id_pitch_list" size="5" style="width: 120px; padding: 10px;"></select>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div style="display:table-cell; width: 25px"></div>
+			
+		{% if subsession.round_number not in start_rounds %}
+
+			<div style="display:table-row">
+				<div style="display:table-cell">
+					<table>
+						<tr valign="top">
+							<td colspan="2" align="left"><b>Last Round Pitch</b><br>
+								<b>Score: <span style="color:blue;"><big>{{ lastround_score }}</b></big></span><br>
+							</td>
+						</tr>
+						<tr valign="top">
+							<td align="left"><i>Platform</i></td><td align="left"><i>Points</i></td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ lastround_pname0 }}</td><td align="left">{{ lastround_ppoints0 }}</td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ lastround_pname1 }}</td><td align="left">{{ lastround_ppoints1 }}</td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ lastround_pname2 }}</td><td align="left">{{ lastround_ppoints2 }}</td>
+						</tr>
+					</table>
+				</div>
+				<div style="display:table-cell; width: 25px"></div>
+				<div style="display:table-cell">
+					<table>
+						<tr valign="top">
+							<td colspan="2" align="left"><b>Best Scoring Pitch</b><br>
+								<b>Score: <span style="color:blue;"><big>{{ best_score }}</b></big></span><br>
+							</td>
+						</tr>
+						<tr valign="top">
+							<td align="left"><i>Platform</i></td><td align="left"><i>Points</i></td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ best_pname0 }}</td><td align="left">{{ best_ppoints0 }}</td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ best_pname1 }}</td><td align="left">{{ best_ppoints1 }}</td>
+						</tr>
+						<tr valign="top">
+							<td align="left">{{ best_pname2 }}</td><td align="left">{{ best_ppoints2 }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			{% if groupsize > 1 %}
+				<div style="display:table-row; height: 10px"></div>
+				<div style="display:table; height: 30px">
+					<span style="color:blue"><i>Click below to reveal each Player's pitch from last round</i></span>		
+				</div>
+				<div style="display:table-row">
+	  				<div style="display:table-cell">
+	  					<button type="button" id="id_alter1_button" onclick="firstPull()">Player {{ alter1_id }} </button>
+	    			</div>
+	    			<div style="display:table-cell; width: 25px"></div>
+	   				<div style="display:table-cell">
+	 	 				<button type="button" id="id_alter2_button" onclick="secondPull()">Player {{ alter2_id }} </button>
+	    			</div>
+	    			<div style="display:table-cell; width: 25px"></div>
+	   				<div style="display:table-cell">
+	 	 				<button type="button" id="id_alter3_button" onclick="thirdPull()">Player {{ alter3_id }} </button>
+	    			</div>
+	  			</div>
+	  			<div style="display:table-row">
+	  				<div style="display:table-cell" id="id_alter1_Pitch">
+	  					<table>
+	  						{% if alter1_recd == False %}
+	  						<tr><td colspan="2" style="width:130px"><i>Not Shared</i></td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						{% else %}
+	  						<tr valign="top">
+								<td colspan="2" align="left">
+									<b>Score: <span style="color:blue;"><big>{{ alter1_score }}</b></big></span><br>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" style="width: 80px"><i>Platform</i></td><td align="left"><i>Points</i></td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter1_pname0 }}</td><td align="left">{{ alter1_ppoints0 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter1_pname1 }}</td><td align="left">{{ alter1_ppoints1 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter1_pname2 }}</td><td align="left">{{ alter1_ppoints2 }}</td>
+							</tr>
+							{% endif %}
+	  					</table>
+	  				</div>
+	  				<div style="display:table-cell; width: 25px"></div>
+	  				<div style="display:table-cell" id="id_alter2_Pitch">
+	  					<table>
+	  						{% if alter2_recd == False %}
+	  						<tr><td colspan="2" style="width:130px"><i>Not Shared</i></td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						{% else %}
+	  						<tr valign="top">
+								<td colspan="2" align="left">
+									<b>Score: <span style="color:blue;"><big>{{ alter2_score }}</b></big></span><br>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" style="width: 80px"><i>Platform</i></td><td align="left"><i>Points</i></td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter2_pname0 }}</td><td align="left">{{ alter2_ppoints0 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter2_pname1 }}</td><td align="left">{{ alter2_ppoints1 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter2_pname2 }}</td><td align="left">{{ alter2_ppoints2 }}</td>
+							</tr>
+							{% endif %}
+	  					</table>
+	  				</div>
+	  				<div style="display:table-cell; width: 25px"></div>
+	  				<div style="display:table-cell" id="id_alter3_Pitch">
+	  					<table>
+	  						{% if alter3_recd == False %}
+	  						<tr><td colspan="2" style="width:130px"><i>Not Shared</i></td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						{% else %}
+	  						<tr valign="top">
+								<td colspan="2" align="left">
+									<b>Score: <span style="color:blue;"><big>{{ alter3_score }}</b></big></span><br>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" style="width: 80px"><i>Platform</i></td><td align="left"><i>Points</i></td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter3_pname0 }}</td><td align="left">{{ alter3_ppoints0 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter3_pname1 }}</td><td align="left">{{ alter3_ppoints1 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter3_pname2 }}</td><td align="left">{{ alter3_ppoints2 }}</td>
+							</tr>
+							{% endif %}
+	  					</table>
+	  				</div>
+				</div>
+				<div style="display:table-row; height: 20px"></div>
+				<div style="display:table-row">
+	  				<div style="display:table-cell">
+	 	 				<button type="button" id="id_alter4_button" onclick="fourthPull()">Player {{ alter4_id }}</button>
+	    			</div>
+	    			<div style="display:table-cell; width: 30px"></div>
+	   				<div style="display:table-cell">
+	 	 				<button type="button" id="id_alter5_button" onclick="fifthPull()">Player {{ alter5_id }}</button>
+	    			</div>
+	  			</div>
+	  			<div style="display:table-row">
+	  				<div style="display:table-cell" id="id_alter4_Pitch">
+	  					<table>
+	  						{% if alter4_recd == False %}
+	  						<tr><td colspan="2" style="width:130px"><i>Not Shared</i></td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						{% else %}
+	  						<tr valign="top">
+								<td colspan="2" align="left">
+									<b>Score: <span style="color:blue;"><big>{{ alter4_score }}</b></big></span><br>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" style="width: 80px"><i>Platform</i></td><td align="left"><i>Points</i></td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter4_pname0 }}</td><td align="left">{{ alter4_ppoints0 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter4_pname1 }}</td><td align="left">{{ alter4_ppoints1 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter4_pname2 }}</td><td align="left">{{ alter4_ppoints2 }}</td>
+							</tr>
+							{% endif %}
+	  					</table>
+	  				</div>
+	  				<div style="display:table-cell; width: 25px"></div>
+	  				<div style="display:table-cell" id="id_alter5_Pitch">
+	  					<table>
+	  						{% if alter5_recd == False %}
+	  						<tr><td colspan="2" style="width:130px"><i>Not Shared</i></td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						<tr><td colspan="2">---</td></tr>
+	  						{% else %}
+	  						<tr valign="top">
+								<td colspan="2" align="left">
+									<b>Score: <span style="color:blue;"><big>{{ alter5_score }}</b></big></span><br>
+								</td>
+							</tr>
+							<tr valign="top">
+								<td align="left" style="width: 80px"><i>Platform</i></td><td align="left"><i>Points</i></td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter5_pname0 }}</td><td align="left">{{ alter5_ppoints0 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter5_pname1 }}</td><td align="left">{{ alter5_ppoints1 }}</td>
+							</tr>
+							<tr valign="top">
+								<td align="left">{{ alter5_pname2 }}</td><td align="left">{{ alter5_ppoints2 }}</td>
+							</tr>
+							{% endif %}
+	  					</table>
+	  				</div>
+				</div>
+			{% endif %}
+		{% endif %}
+			
+		</div>
+	</div>
+
+	<br>
+
+
+	<button id="id_submit_button" onclick="validateForm()" class="otree-btn-next btn btn-primary next-button otree-next-button">Submit</button>
+
+{% endblock %}

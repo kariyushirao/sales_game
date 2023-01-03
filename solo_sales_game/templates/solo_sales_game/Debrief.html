@@ -1,0 +1,190 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block scripts %}
+<style>
+	.otree-title {
+		display: block;
+		font-size: 1.35em;
+		color:white;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	input[type="textarea"],
+	textarea {
+		height: 75px;
+		padding: 0;
+		border: none;
+	}
+	.myClass::-webkit-slider-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 2px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-webkit-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassFF::-moz-range-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		-moz-appearance: none !important;
+		margin-top: -8px !important;
+	}
+	.myClassMS::-ms-thumb {
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		border: 1px solid #2497E3;
+		height: 20px !important;
+		width: 20px !important;
+		border-radius: 10px !important;
+		background: #3071A9 !important;
+		cursor: pointer !important !important;
+		margin-top: -8px !important;
+	}
+
+	input[type=range] {
+		-webkit-appearance: none;
+		margin: 10px 0;
+		height: 8px;
+		width: 100%;
+		border: 1px solid white;
+	}
+	input[type=range]:focus {
+		outline: none;
+	}
+	input[type=range]::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background: #64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-webkit-slider-thumb {
+		border: 0px;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-webkit-appearance: none;
+	}
+	input[type=range]::-moz-range-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+		background:#64bbf5;
+		border-radius: 1px;
+		border: 0.5px solid #3071A9;
+	}
+	input[type=range]::-moz-range-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+		-moz-appearance: none;
+	}
+	input[type=range]::-moz-focus-outer {
+    	border: 0;
+    	outline: none;
+    }
+	input[type=range]::-ms-track {
+		width: 100%;
+		height: 8px;
+		cursor: pointer;
+		animate: 0.2s;
+		background:transparent;
+		border-color:transparent;
+		border-width: 16px 0;
+		color: transparent;
+	}
+	input[type=range]::-ms-fill-lower {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-lower {
+    	background: #64bbf5;
+    }
+    input[type=range]::-ms-fill-upper {
+		background: #64bbf5;
+		border: 0.5px solid #3071A9;
+		border-radius: 1px;
+		box-shadow: 0px 0px 0px #000000, 0px 0px 0px #3071A9;
+	}
+	input[type=range]:focus::-ms-fill-upper {
+    	background: #64bbf5;
+    }
+	input[type=range]::-ms-thumb {
+		-webkit-appearance: none;
+		border: none;
+		height: 0px;
+		width: 0px;
+		border-radius: 0px;
+	}
+</style>
+<script>
+	$(document).ready(function () {
+	 	$('input[name=selfassessment').on('input change', function () {
+	  		$('input[name=selfassessment]').addClass('myClass').addClass('myClassFF').addClass('myClassMS');
+	  		$('#id_checkslider_selfassessment').val(1);
+	  	});
+	});
+</script>
+{% endblock %}
+
+{% block title %}
+	Wrap Up: Final Questions
+{% endblock %}
+
+{% block content %}
+
+	<input type="hidden" name="checkslider_selfassessment" id="id_checkslider_selfassessment"/>
+	{{ form.checkslider_selfassessment.errors }}
+
+	<p><big>Last few questions before we wrap up...</big></p>
+
+	<p><b>What advice would you give your friends to help them perform well in this game?</b>  Imagine your close 
+	friends are about to play The Sales Game.  What strategy should they use?<br>
+	(One or two sentences is enough.)</p>
+	{% formfield player.strategy with label = "" %}
+
+	<br>
+	<p><b>How do you think your performance in The Sales Game compares with other players?</b>  Indicate your response 
+	on the scale below.  At least 100 people have played The Sales Game so far.  Select "Worst Performance" if you think 
+	every other person performed better than you did.  Select "Best Performance" if you think you performed better than 
+	every other person who has played the game.</p>
+
+	<div style="float:center; width: 725px; margin: 0 auto; padding: 5px">
+		<p style="float:left"><strong>Worst Performance&emsp;</strong></p>
+		<p style="float:right"><strong>Best Performance</strong></p>
+			{% formfield player.selfassessment with label="" %}
+	</div>
+
+	<br>
+	<p><b>Do you have any other feedback</b> about any part of this game or your experience that you would like to share
+	with us?<br>
+	(If not, just type NA.)</p>
+	{% formfield player.comments with label = "" %}
+
+	<br>
+	<b>That's it! Click Next to complete this HIT.</b>
+	<br><br>
+
+	{% next_button %}
+	
+{% endblock %}
