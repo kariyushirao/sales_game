@@ -1,204 +1,79 @@
-# oTree
+Note: These instructions are based on the macOS.  If you have a Windows machine, you'll 
+need to adapt these instructions for Windows.
 
-oTree is a framework based on Python and Django that lets you build:
+## oTree
 
-- Multiplayer strategy games, like the prisoner's dilemma, public goods game, and auctions
-- Controlled behavioral experiments in economics, psychology, and related fields
-- Surveys and quizzes
+oTree is a framework based on Python and Django that lets you build single and multiplayer
+strategy games, surveys, and quizzes.
 
-## Live demo
-http://demo.otree.org/
+Homepage: http://www.otree.org/
 
-## Homepage
-http://www.otree.org/
+Live Demo: http://demo.otree.org/
 
-## Docs
+Docs: http://otree.readthedocs.org
 
-http://otree.readthedocs.org
+# Running the Sample Games in this Repo
+The games in this Repo are built using a legacy version of oTree.  To run these games on 
+your machine, you'll need to install oTree (2.3.10) and a legacy version of Python (3.7.15).  
+It will be easier to set up and switch between versions of Python on your machine if you first 
+install Anaconda.
 
-## Quick start
+### Install Anaconda and Python 3.7.15
+Install Anaconda (macOS): https://docs.anaconda.com/anaconda/install/mac-os/
 
-Rather than cloning this repo directly,
-run these commands:
+Open up the Terminal on your Mac, and enter the following commands:
 
 ```
-pip3 install -U otree-core
-otree startproject oTree
-otree resetdb
-otree runserver
+conda create --name Py3715 python=3.7.15
+conda activate Py3715
 ```
 
-## Example game: guess 2/3 of the average
+You should now see (Py3715) at the start of the command prompt.
 
-Below is a full implementation of the
-[Guess 2/3 of the average](https://en.wikipedia.org/wiki/Guess_2/3_of_the_average) game,
-where everyone guesses a number, and the winner is the person closest to 2/3 of the average.
-The game is repeated for 3 rounds.
-You can play the below game [here](http://otree-demo.herokuapp.com/demo/guess_two_thirds/).
+### Install oTree 2.3.10
+After activating your Python 3.7.15 virtual environment, enter the following commands:
 
-### models.py
-
-```python
-from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency
-)
-
-class Constants(BaseConstants):
-    players_per_group = 3
-    num_rounds = 3
-    name_in_url = 'guess_two_thirds'
-
-    jackpot = Currency(100)
-    guess_max = 100
-
-
-class Subsession(BaseSubsession):
-    pass
-
-
-class Group(BaseGroup):
-    two_thirds_avg = models.FloatField()
-    best_guess = models.PositiveIntegerField()
-    num_winners = models.PositiveIntegerField()
-
-    def set_payoffs(self):
-        players = self.get_players()
-        guesses = [p.guess for p in players]
-        two_thirds_avg = (2 / 3) * sum(guesses) / len(players)
-        self.two_thirds_avg = round(two_thirds_avg, 2)
-
-        self.best_guess = min(guesses,
-            key=lambda guess: abs(guess - self.two_thirds_avg))
-
-        winners = [p for p in players if p.guess == self.best_guess]
-        self.num_winners = len(winners)
-
-        for p in winners:
-            p.is_winner = True
-            p.payoff = Constants.jackpot / self.num_winners
-
-    def two_thirds_avg_history(self):
-        return [g.two_thirds_avg for g in self.in_previous_rounds()]
-
-
-class Player(BasePlayer):
-    guess = models.PositiveIntegerField(max=Constants.guess_max)
-    is_winner = models.BooleanField(initial=False)
+```
+pip3 install otree==2.3.10
 ```
 
-### views.py
+### Download This Repository
+Click the "Code" button above and select "Download ZIP."  Unzip the downloaded file, and 
+you should see all of the folders/files from this repository on your local machine.
 
-```python
-from . import models
-from otree.api import Page, WaitPage
+## Simple 3-Person Game: P-Beauty
+This repo includes a simple implementation of a p-beauty contest (https://en.wikipedia.org/wiki/Guess_2/3_of_the_average).
+Participants are matched into groups of 3.  On each trial, each participant guesses a number 
+between 0 and 100.  The participant whose number is closest to 2/3 of the average of the three 
+participants' chosen numbers is the winner.
 
+This is a good place to start to get yourself oriented to the oTree framework before moving 
+on to The Sales Game.
 
-class Introduction(Page):
-    def is_displayed(self):
-        return self.round_number == 1
+## The Sales Game
+The other two games in this repository are versions of The Sales Game.  The Sales Game is a
+20-armed bandit game comprised of 45 trials separated into three 15-trial Phases.  In each Phase
+participants explore a different 20-armed bandit.  Participants must select exactly three arms
+on each trial, and at the end of each trial the realized point value for each arm is revealed.
 
+This repository contains a Solo version and a Social version of The Sales Game.  In the Solo 
+version of the Game participants play alone without access to any side observations of the arm 
+values.  In the Social version of the Game, participants are matched into groups of 3-6, and
+have the option to share their results on each trial with the other members of their group. If
+two members of a group both choose to share their results with each other, they are able to
+view each other's results while making their selection on the next trial.  If either of a
+pair choose not to share with the other, then neither of the participants may view the other's
+results.
 
-class Guess(Page):
-    form_model = models.Player
-    form_fields = ['guess']
+A video demonstration of the Social Sales Game functionality is available on YouTube:
+https://www.youtube.com/watch?v=J5LWsjGL4sE
 
+An in-depth description of the Solo and Social version of The Sales Game is available in 
+Section 3.1 of Rao (2021), starting on page 18:
+https://www.proquest.com/docview/2558047254?pq-origsite=gscholar&fromopenview=true
 
-class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
+As of Jan 3, 2022, there are more robust annotations throughout the code for the Social 
+version of The Sales Game.  You should start with the Solo version to get a sense of the 
+Game dynamics, but if you get stuck, open the Social version to see if the annotations in 
+that version of the code are helpful.
 
-
-class Results(Page):
-    def vars_for_template(self):
-        sorted_guesses = sorted(p.guess for p in self.group.get_players())
-
-        return {'sorted_guesses': sorted_guesses}
-
-
-page_sequence = [Introduction,
-                 Guess,
-                 ResultsWaitPage,
-                 Results]
-```
-
-### HTML templates
-
-[Instructions.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Instructions.html)
-[Introduction.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Introduction.html)
-[Guess.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Guess.html)
-[Results.html](https://github.com/oTree-org/oTree/blob/master/guess_two_thirds/templates/guess_two_thirds/Results.html)
-
-### tests.py (optional)
-
-Test bots for multiplayer games run in parallel, 
-and can run either from the command line,
-or in the browser, which you can try [here](http://otree-demo.herokuapp.com/demo/matching_pennies_bots/).
-
-```python
-
-from otree.api import Bot, SubmissionMustFail
-from . import views
-from .models import Constants
-
-class PlayerBot(Bot):
-    cases = ['p1_wins', 'p1_and_p2_win']
-
-    def play_round(self):
-        if self.subsession.round_number == 1:
-            yield (views.Introduction)
-
-        if self.case == 'p1_wins':
-            if self.player.id_in_group == 1:
-                for invalid_guess in [-1, 101]:
-                    yield SubmissionMustFail(views.Guess, {"guess": invalid_guess})
-                yield (views.Guess, {"guess": 9})
-                assert self.player.payoff == Constants.jackpot
-                assert 'you win' in self.html
-            else:
-                yield (views.Guess, {"guess": 10})
-                assert self.player.payoff == 0
-                assert 'you did not win' in self.html
-        else:
-            if self.player.id_in_group in [1, 2]:
-                yield (views.Guess, {"guess": 9})
-                assert self.player.payoff == Constants.jackpot / 2
-                assert 'you are one of the 2 winners' in self.html
-            else:
-                yield (views.Guess, {"guess": 10})
-                assert self.player.payoff == 0
-                assert 'you did not win' in self.html
-
-        yield (views.Results)
-```
-
-See docs on [bots](http://otree.readthedocs.io/en/latest/bots.html).
-
-
-## Features 
-
-- Extensive admin interface for launching games & surveys, managing participants, monitoring data, etc.
-- Flexible API, e.g. for [group re-matching](http://otree.readthedocs.io/en/latest/groups.html#group-matching)
-- Publish your games to [Amazon Mechanical Turk](http://otree.readthedocs.io/en/latest/mturk.html)
-
-
-## Contact & support
-
-[Help & discussion mailing list](https://groups.google.com/forum/#!forum/otree)
-
-Contact chris@otree.org with bug reports.
-
-## Contributors
-
-* Gregor Muellegger (http://gremu.net/, https://github.com/gregmuellegger)
-* Juan B. Cabral (http://jbcabral.org/, https://github.com/leliel12)
-* Bertrand Bordage (https://github.com/BertrandBordage)
-* Alexander Schepanovski (https://github.com/Suor/)
-* Alexander Sandukovskiy
-* Som Datye
-* Benson Njogu (https://github.com/benarito)
-
-
-## Related repositories
-
-The oTree core libraries are [here](https://github.com/oTree-org/otree-core).
