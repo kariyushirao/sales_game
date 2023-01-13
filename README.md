@@ -15,6 +15,7 @@ Docs: http://otree.readthedocs.org
 # Running the Sample Games in this Repo
 The games in this Repo are built using a legacy version of oTree.  To run these games on 
 your machine, you'll need to install oTree (2.3.10) and a legacy version of Python (3.7.15).  
+
 It will be easier to set up and switch between versions of Python on your machine if you first 
 install Anaconda.
 

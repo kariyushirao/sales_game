@@ -94,7 +94,7 @@ class Subsession(BaseSubsession):
 
 			print("PARTICIPANT NO: ", p.id_in_subsession, "CONDITION: ", p.treatment)
 
-			#Phase 1: birds
+			# Phase 1: birds
 			if self.round_number < 16:
 				# fresh copy of birds dictionary 
 				platform_list = self.birds_dict()
@@ -104,12 +104,12 @@ class Subsession(BaseSubsession):
 					points_list = self.high_points()
 				else:
 					points_list = self.med1_points()
-			#Phase 2: spices
+			# Phase 2: spices
 			elif self.round_number > 15 and self.round_number < 31:
 				# fresh copy of spices dictionary
 				platform_list = self.spices_dict()
 				points_list = self.med2_points()
-			#Phase 3: elements
+			# Phase 3: elements
 			else: 
 				# fresh copy of elements dictionary
 				platform_list = self.elements_dict()
@@ -120,12 +120,16 @@ class Subsession(BaseSubsession):
 				else:
 					points_list = self.med1_points()
 
-			# draw point values from normal distribution around each platform's mean with
-			# STANDARD DEVIATION = 20
+			# for each platform draw a realized point value for the current round from a normal 
+			# distribution around that platform's mean with STANDARD DEVIATION = 20 points
 			for i in range(0, len(platform_list)):
 				point_value = round(random.gauss(points_list[i], 20))
+				# in the very rare event that a number below zero is randomly drawn, this
+				# block redraws a new number until the point value is >= zero
 				while point_value < 0:
 					point_value = round(random.gauss(points_list[i], 20))
+				# replace the placeholder platform value for the current platform, for the
+				# current round, with the realized point value that was just drawn
 				platform_list[i][1] = point_value
 
 			# randomize order of platforms 
