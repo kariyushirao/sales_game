@@ -69,6 +69,10 @@ results.
 A video demonstration of the Social Sales Game functionality is available on YouTube:
 https://www.youtube.com/watch?v=J5LWsjGL4sE
 
+The Excel file titled 'SocialSalesGame_Data.xlsx' contains data collected from MTurk Workers 
+playing the Social Sales Game.  The first tab of the Excel file contains a KEY that describes
+the contents of the file in further detail.
+
 An in-depth description of the Solo and Social version of The Sales Game is available in 
 Section 3.1 of Rao (2021), starting on page 18:
 https://www.proquest.com/docview/2558047254?pq-origsite=gscholar&fromopenview=true
