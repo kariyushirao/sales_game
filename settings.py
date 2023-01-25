@@ -17,7 +17,7 @@ else:
     DEBUG = True
 
 # don't share this with anybody.
-SECRET_KEY = '=zx=7j0vl1cc($jp%axd--wwc@fx1b6dfowieux3$64$j5e^zd'
+SECRET_KEY = #[Your_Secret_Key]
 
 # AUTH_LEVEL:
 # this setting controls which parts of your site are freely accessible,
@@ -32,7 +32,7 @@ SECRET_KEY = '=zx=7j0vl1cc($jp%axd--wwc@fx1b6dfowieux3$64$j5e^zd'
 # for flexibility, you can set it in the environment variable OTREE_AUTH_LEVEL
 AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL')
 
-ADMIN_USERNAME = 'kdizzle'
+ADMIN_USERNAME = #[Your_Auth_Name]
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
@@ -79,13 +79,13 @@ DEMO_PAGE_INTRO_TEXT = """
 
 ROOMS = [
     {
-        'name': 'RaoWebLab',
-        'display_name': 'Rao Web Lab',
+        #'name': '_',
+        #'display_name': '_',
         # 'participant_label_file': '_rooms/econ101.txt',
     },
     {
-        'name': 'live_demo',
-        'display_name': 'Room for live demo (no participant labels)',
+        #'name': 'live_demo',
+        #'display_name': '_',
     },
 ]
 
